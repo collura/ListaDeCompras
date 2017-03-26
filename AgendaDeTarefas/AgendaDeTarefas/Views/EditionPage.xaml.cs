@@ -2,7 +2,7 @@
 using Prism.Navigation;
 using Xamarin.Forms;
 
-namespace AgendaDeTarefas
+namespace ListaDeCompras
 {
     public partial class EditionPage : ContentPage
     {

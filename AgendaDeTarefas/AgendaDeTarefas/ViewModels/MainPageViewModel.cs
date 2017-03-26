@@ -1,34 +1,47 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 
-namespace AgendaDeTarefas
+namespace ListaDeCompras
 {
     public class MainPageViewModel : BindableBase, INavigationAware
     {
-        private INavigationService navigationService { get; set; }
-        private NavigationParameters navigationParameters;
+        private INavigationService NavigationService { get; set; }
+        private IPageDialogService DialogService { get; set; }
+        private NavigationParameters navigationParameters { get; set; }
         public ObservableCollection<Item> ItensToListView { get; set; }  
-        public ICommand AddItem { get; private set; }
+        public ICommand AddItem {get; private set; }
 
 
-        public MainPageViewModel(INavigationService navigationService)
+        public MainPageViewModel(INavigationService navigationService, IPageDialogService dialogService)
         {
-            this.navigationService = navigationService;
-            AddItem = new Command(() => _addItem());
+            NavigationService = navigationService;
+            DialogService = dialogService;
+            AddItem = new Command(_addItem);
             ItensToListView = new ObservableCollection<Item>();
-            LoadList();
+            LoadList();           
+        }
+
+        void SelectedItem_Click(object sender, SelectedItemChangedEventArgs e)
+        {
+            var item = (Item)e.SelectedItem;
+            DialogService.DisplayAlertAsync("", item.Nome, "ok");
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)
         {
+            if (parameters.ContainsKey("ItensToListView")) {
+                ItensToListView = (ObservableCollection<Item>)parameters["ItensToListView"];
+            }
             return;
         }
     
@@ -55,7 +68,7 @@ namespace AgendaDeTarefas
         private async void _addItem() {
             navigationParameters = new NavigationParameters();
             navigationParameters.Add("ItensToListView", ItensToListView);   
-            await navigationService.NavigateAsync("EditionPage", navigationParameters);
-        }
+            await NavigationService.NavigateAsync("EditionPage", navigationParameters);
+        }       
     }
 }

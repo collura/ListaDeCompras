@@ -1,23 +1,30 @@
-﻿using System;
+﻿using Prism.Mvvm;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
-namespace AgendaDeTarefas
+namespace ListaDeCompras
 {
     public class ItemService
     {
-       
-        public static ItemDirectory LoadItens() {
-            ItemDirectory itemDirectory = new ItemDirectory();
+        private static ItemDirectory itemDirectory = new ItemDirectory();
 
-                itemDirectory.itens.Add(new Item() { Nome = "Sabonete", Quantidade = 4 });
-                itemDirectory.itens.Add(new Item() { Nome = "Frios", Quantidade = 900 });
-                itemDirectory.itens.Add(new Item() { Nome = "Gatorade", Quantidade = 5 });
-                itemDirectory.itens.Add(new Item() { Nome = "Atum", Quantidade = 7 });
+        public static ItemDirectory LoadItens() {            
+                itemDirectory.itens.Add(new Item() { Nome = "Sabonete", Quantidade = "4" });
+                itemDirectory.itens.Add(new Item() { Nome = "Frios", Quantidade = "900" });
+                itemDirectory.itens.Add(new Item() { Nome = "Gatorade", Quantidade = "5" });
+                itemDirectory.itens.Add(new Item() { Nome = "Atum", Quantidade = "7" });
 
-            return itemDirectory;
+           return itemDirectory;
+        }
+
+
+        public static void DeleteItem(ObservableCollection<Item> lista, Item item){
+            lista.Remove(item);
         }
     }
 }
