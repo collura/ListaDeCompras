@@ -1,12 +1,14 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Prism.Navigation;
+using Xamarin.Forms;
 
-namespace AgendaDeTarefas.Views
+namespace AgendaDeTarefas
 {
     public partial class EditionPage : ContentPage
     {
         public EditionPage()
         {
             InitializeComponent();
-        }
+        }       
     }
 }

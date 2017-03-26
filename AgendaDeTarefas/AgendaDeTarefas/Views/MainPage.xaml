@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="AgendaDeTarefas.Views.MainPage"
-             Title="Lista de Compras">
-<ContentPage.ToolbarItems>
+             Title="Lista de Tarefas"
+             x:Class="AgendaDeTarefas.MainPage">
+ <ContentPage.ToolbarItems>
         <ToolbarItem Name="Adicionar" Command="{Binding AddItem}" Order="Primary" Priority="0" />
 </ContentPage.ToolbarItems>
 

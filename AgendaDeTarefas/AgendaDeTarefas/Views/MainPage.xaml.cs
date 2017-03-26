@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace AgendaDeTarefas.Views
+namespace AgendaDeTarefas
 {
     public partial class MainPage : ContentPage
     {

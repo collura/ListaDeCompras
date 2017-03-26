@@ -1,8 +1,4 @@
-﻿using AgendaDeTarefas.Models;
-using AgendaDeTarefas.Models.Entities;
-using AgendaDeTarefas.Models.Services;
-using AgendaDeTarefas.Views;
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using System;
@@ -13,12 +9,12 @@ using System.Windows.Input;
 using Xamarin.Forms;
 
 
-namespace AgendaDeTarefas.ViewModels
+namespace AgendaDeTarefas
 {
     public class MainPageViewModel : BindableBase, INavigationAware
     {
         private INavigationService navigationService { get; set; }
-       // private NavigationParameters navigationParameters;
+        private NavigationParameters navigationParameters;
         public ObservableCollection<Item> ItensToListView { get; set; }  
         public ICommand AddItem { get; private set; }
 
@@ -33,18 +29,20 @@ namespace AgendaDeTarefas.ViewModels
 
         public void OnNavigatedFrom(NavigationParameters parameters)
         {
-            throw new NotImplementedException();
+            return;
         }
+    
 
         public void OnNavigatingTo(NavigationParameters parameters)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         public void OnNavigatedTo(NavigationParameters parameters)
         {
-            throw new NotImplementedException();
+            return;
         }
+    
 
         private void LoadList() {
 
@@ -55,9 +53,9 @@ namespace AgendaDeTarefas.ViewModels
 
 
         private async void _addItem() {
-            // navigationParameters = new NavigationParameters();
-            //navigationParameters.Add("ItensToListView", ItensToListView);   
-            await navigationService.NavigateAsync("EditionPage");
+            navigationParameters = new NavigationParameters();
+            navigationParameters.Add("ItensToListView", ItensToListView);   
+            await navigationService.NavigateAsync("EditionPage", navigationParameters);
         }
     }
 }
