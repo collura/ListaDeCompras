@@ -142,6 +142,12 @@
     <AndroidResource Include="Resources\drawable\add.png" />
     <AndroidResource Include="Resources\drawable\delete.png" />
     <AndroidResource Include="Resources\drawable\carrin.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\delete.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\delete.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\delete.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\addItem.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\addItem.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\addItem.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AgendaDeTarefas\ListaDeCompras.csproj">
