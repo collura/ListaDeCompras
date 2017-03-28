@@ -18,8 +18,7 @@ namespace ListaDeCompras
         public string Quantidade { get; set; }
         public string UnidadeMedida { get; set; }
         public ICommand SalvarItem { get; set; }
-        //Teste
-
+    
         public EditionPageViewModel(INavigationService navigationService)
         {
             SalvarItem = new Command(_salvarItem);
