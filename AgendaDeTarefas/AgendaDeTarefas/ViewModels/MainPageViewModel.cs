@@ -1,47 +1,34 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
-using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 
-namespace ListaDeCompras
+namespace AgendaDeTarefas
 {
     public class MainPageViewModel : BindableBase, INavigationAware
     {
-        private INavigationService NavigationService { get; set; }
-        private IPageDialogService DialogService { get; set; }
-        private NavigationParameters navigationParameters { get; set; }
+        private INavigationService navigationService { get; set; }
+        private NavigationParameters navigationParameters;
         public ObservableCollection<Item> ItensToListView { get; set; }  
-        public ICommand AddItem {get; private set; }
+        public ICommand AddItem { get; private set; }
 
 
-        public MainPageViewModel(INavigationService navigationService, IPageDialogService dialogService)
+        public MainPageViewModel(INavigationService navigationService)
         {
-            NavigationService = navigationService;
-            DialogService = dialogService;
-            AddItem = new Command(_addItem);
+            this.navigationService = navigationService;
+            AddItem = new Command(() => _addItem());
             ItensToListView = new ObservableCollection<Item>();
-            LoadList();           
-        }
-
-        void SelectedItem_Click(object sender, SelectedItemChangedEventArgs e)
-        {
-            var item = (Item)e.SelectedItem;
-            DialogService.DisplayAlertAsync("", item.Nome, "ok");
+            LoadList();
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)
         {
-            if (parameters.ContainsKey("ItensToListView")) {
-                ItensToListView = (ObservableCollection<Item>)parameters["ItensToListView"];
-            }
             return;
         }
     
@@ -68,7 +55,7 @@ namespace ListaDeCompras
         private async void _addItem() {
             navigationParameters = new NavigationParameters();
             navigationParameters.Add("ItensToListView", ItensToListView);   
-            await NavigationService.NavigateAsync("EditionPage", navigationParameters);
-        }       
+            await navigationService.NavigateAsync("EditionPage", navigationParameters);
+        }
     }
 }

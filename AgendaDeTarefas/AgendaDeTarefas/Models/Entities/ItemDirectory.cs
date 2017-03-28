@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ListaDeCompras
+namespace AgendaDeTarefas
 {
     public class ItemDirectory
     {

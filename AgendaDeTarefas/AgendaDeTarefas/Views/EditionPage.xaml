@@ -3,12 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="ListaDeCompras.EditionPage">
-    <StackLayout Padding="20" Spacing="10">
-        <Label Text="Descrição"/>
-        <Entry Placeholder="Digite o Item" Text="{Binding Descricao}"/>
-        <Label Text="Quantidade"/>
-        <Entry Placeholder="Digite a quantidade" Text="{Binding Quantidade}"/>
-        <Button Text="Salvar" Command="{Binding SaveItem}"/>
+             x:Class="AgendaDeTarefas.EditionPage">
+    <StackLayout>
+        
+        
     </StackLayout>  
 </ContentPage>

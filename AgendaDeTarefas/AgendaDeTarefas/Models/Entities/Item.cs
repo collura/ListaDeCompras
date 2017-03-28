@@ -1,27 +1,26 @@
-﻿using Prism.Mvvm;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ListaDeCompras
+namespace AgendaDeTarefas
 {
-    public class Item : BindableBase
+    public class Item
     {
         private string _nome;
         public string Nome {
             get { return _nome; }
-            set { SetProperty(ref _nome, value); }
+            set { _nome = value; }
         }
 
        
 
-        private string _quantidade;
-        public string Quantidade
+        private int _quantidade;
+        public int Quantidade
         {
             get { return _quantidade; }
-            set { SetProperty(ref _quantidade, value); }
+            set { _quantidade = value; }
         }
 
 
@@ -30,7 +29,7 @@ namespace ListaDeCompras
         public int Preco
         {
             get { return _preco; }
-            set { SetProperty(ref _preco, value); }
+            set { _preco = value; }
         }
     }
 }

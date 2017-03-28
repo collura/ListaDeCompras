@@ -9,7 +9,7 @@ using Android.OS;
 using Prism.Unity;
 using Microsoft.Practices.Unity;
 
-namespace ListaDeCompras.Droid
+namespace AgendaDeTarefas.Droid
 {
     [Activity(Label = "AgendaDeTarefas", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity

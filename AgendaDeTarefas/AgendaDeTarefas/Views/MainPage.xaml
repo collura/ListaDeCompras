@@ -5,58 +5,54 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              Title="Lista de Compras"         
              x:Class="ListaDeCompras.MainPage">
-    
-            <ContentPage.ToolbarItems>                       
-                    <ToolbarItem 
-                        Command="{Binding AddItem}" 
-                        Order="Default" 
-                        Priority="2" 
-                        Icon="addItem.png"/>
+<ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="ItemFinished"                     
+                     Order="Default" Priority="3" 
+                     Icon="delete.png"/>
 
-                    <ToolbarItem 
-                        Clicked ="ItemFinished" 
-                        Order="Default" 
-                        Priority="1" 
-                        Icon="delete.png"/>
-            </ContentPage.ToolbarItems>
-    
-            <StackLayout HorizontalOptions="Fill" 
-                         VerticalOptions="Fill" 
-                         Padding="5,25,5,10">
-                
-                        <ListView  
-                            SeparatorColor="Orange"
-                            HorizontalOptions="Fill"
-                            VerticalOptions="Fill"
-                            x:Name="lvLista"                                     
-                            ItemsSource="{Binding ItensToListView}">
-                            <ListView.ItemTemplate>
-                                     <DataTemplate>
-                                              <ViewCell>
-                                                    <ViewCell.View>
-                                                        <StackLayout
-                                                            Orientation="Horizontal">                                                          >                                                          
-                                                            <Label Text="{Binding Nome}" 
-                                                                    VerticalOptions="Center" 
-                                                                    TextColor="Green"
-                                                                    FontAttributes="Bold"
-                                                                    HorizontalOptions="CenterAndExpand"
-                                                                    HorizontalTextAlignment="Center" 
-                                                                    FontSize="20" 
-                                                                    Margin="0,0,40,0"/>
-                                                            <Label Text="{Binding Quantidade}" 
-                                                                    VerticalOptions="Center" 
-                                                                    HorizontalOptions="EndAndExpand"
-                                                                    FontAttributes="Bold"
-                                                                    HorizontalTextAlignment="End" 
-                                                                    FontSize="22" Margin="0,0,20,0" 
-                                                                    TextColor="Blue"/>
-                                                        </StackLayout>
-                                                    </ViewCell.View>
-                                              </ViewCell>
-                                      </DataTemplate>
-                            </ListView.ItemTemplate>
-                     </ListView>
-                
-            </StackLayout>
+        <ToolbarItem Command="{Binding AddItem}" 
+                     Order="Default" Priority="1" 
+                     Icon="add.png"/>
+</ContentPage.ToolbarItems>
+    <StackLayout HorizontalOptions="Fill" 
+                 VerticalOptions="Fill" 
+                 Padding="5,25,5,10">
+        <ListView  
+            SeparatorColor="Orange"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            x:Name="lvLista"
+            SelectedItem = "{Binding SelectedItem_Click, Mode=OneWay}"                
+            ItemsSource="{Binding ItensToListView}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell Height="100">
+                        <StackLayout Orientation="Horizontal" 
+                                     Spacing="10">
+                            <Image Source="carrin.png" 
+                                   HeightRequest="124" 
+                                   WidthRequest="90" 
+                                   HorizontalOptions="StartAndExpand" 
+                                   VerticalOptions="Center"/>
+                            <Label Text="{Binding Nome}" 
+                                   VerticalOptions="Center" 
+                                   TextColor="Green"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="CenterAndExpand"
+                                   HorizontalTextAlignment="Center" 
+                                   FontSize="20" 
+                                   Margin="0,0,40,0"/>
+                            <Label Text="{Binding Quantidade}" 
+                                   VerticalOptions="Center" 
+                                   HorizontalOptions="EndAndExpand"
+                                   FontAttributes="Bold"
+                                   HorizontalTextAlignment="End" 
+                                   FontSize="22" Margin="0,0,20,0" 
+                                   TextColor="Blue"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>

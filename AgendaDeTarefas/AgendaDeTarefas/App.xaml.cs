@@ -3,7 +3,9 @@ using Xamarin.Forms;
 using System;
 using Prism.Navigation;
 
-namespace ListaDeCompras
+
+
+namespace AgendaDeTarefas
 {
 
        public partial class App : PrismApplication
@@ -11,7 +13,8 @@ namespace ListaDeCompras
         public App(IPlatformInitializer initializer = null) : base(initializer) { }
 
         protected override void OnInitialized()
-        {           
+        {
+           
             InitializeComponent();
             NavigationService.NavigateAsync("NavigationPage/MainPage");       
         }
