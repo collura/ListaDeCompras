@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListaDeCompras", "AgendaDeTarefas\AgendaDeTarefas\ListaDeCompras.csproj", "{3A56FD9C-B207-4B47-BC47-0F1388857E0B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListaDeCompras", "ListaDeCompras\ListaDeCompras\ListaDeCompras.csproj", "{3A56FD9C-B207-4B47-BC47-0F1388857E0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListaDeCompras.Droid", "AgendaDeTarefas\AgendaDeTarefas.Droid\ListaDeCompras.Droid.csproj", "{F35F74A6-2852-40E9-8F94-C667BFA78862}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListaDeCompras.Droid", "ListaDeCompras\ListaDeCompras.Droid\ListaDeCompras.Droid.csproj", "{F35F74A6-2852-40E9-8F94-C667BFA78862}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

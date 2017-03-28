@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,15 +15,20 @@ namespace ListaDeCompras
     public class MainPageViewModel : BindableBase, INavigationAware
     {
         private INavigationService navigationService { get; set; }
+        private IPageDialogService DialogService { get; set; }
         private NavigationParameters navigationParameters;
         public ObservableCollection<Item> ItensToListView { get; set; }  
-        public ICommand AddItem { get; private set; }
+        public DelegateCommand AddItem { get; private set; }
+        public ICommand SelectedItem_Click { get; set; }
 
 
-        public MainPageViewModel(INavigationService navigationService)
+
+        public MainPageViewModel(INavigationService navigationService, IPageDialogService dialogService)
         {
             this.navigationService = navigationService;
-            AddItem = new Command(() => _addItem());
+            this.DialogService = dialogService;
+            AddItem = new DelegateCommand(() => _addItem());
+            SelectedItem_Click  = new Command((object o) => _selectedItem_Click(o));
             ItensToListView = new ObservableCollection<Item>();
             LoadList();
         }
@@ -56,6 +62,13 @@ namespace ListaDeCompras
             navigationParameters = new NavigationParameters();
             navigationParameters.Add("ItensToListView", ItensToListView);   
             await navigationService.NavigateAsync("EditionPage", navigationParameters);
+        }
+
+        private void _selectedItem_Click(object o)
+        {
+            Item item = new Item();
+            item = (Item) o;
+            DialogService.DisplayAlertAsync("Teste", item.Nome,"Ok");
         }
     }
 }
