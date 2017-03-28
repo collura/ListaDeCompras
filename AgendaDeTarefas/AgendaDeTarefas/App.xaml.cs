@@ -5,7 +5,7 @@ using Prism.Navigation;
 
 
 
-namespace AgendaDeTarefas
+namespace ListaDeCompras
 {
 
        public partial class App : PrismApplication

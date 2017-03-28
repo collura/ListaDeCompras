@@ -8,8 +8,8 @@
     <ProjectGuid>{3A56FD9C-B207-4B47-BC47-0F1388857E0B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AgendaDeTarefas</RootNamespace>
-    <AssemblyName>AgendaDeTarefas</AssemblyName>
+    <RootNamespace>ListaDeCompras</RootNamespace>
+    <AssemblyName>ListaDeCompras</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

@@ -3,56 +3,102 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             Title="Lista de Compras"         
+             Title="Lista de Compras"               
              x:Class="ListaDeCompras.MainPage">
-<ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="ItemFinished"                     
-                     Order="Default" Priority="3" 
-                     Icon="delete.png"/>
+            <ContentPage.ToolbarItems>
+                <ToolbarItem Order="Default" Priority="3" 
+                        Icon="menu.png"/>
+                <ToolbarItem Order="Default" Priority="2" 
+                        Icon="history.png"/>
+                <ToolbarItem Command="{Binding AddItem}" 
+                        Order="Default" Priority="1" 
+                        Icon="addItem.png"/>
+            </ContentPage.ToolbarItems> 
+            <StackLayout HorizontalOptions="Fill"
+                         VerticalOptions="Fill">
+                         <StackLayout
+                                Orientation="Horizontal"
+                                HorizontalOptions="Fill"                     
+                                BackgroundColor="LightSteelBlue">
+                                        <Label Text="Qtd"
+                                            HorizontalOptions="Start"
+                                            TextColor="Black"
+                                            Margin="10,0,0,0"
+                                            VerticalOptions="Center"/>
+                                        <Label Text="Item a comprar"
+                                            HorizontalOptions="CenterAndExpand"
+                                            VerticalOptions="Center"
+                                            TextColor="Black"
+                                            HorizontalTextAlignment="Center"/>
+                                        <Label Text="Concluído"
+                                            HorizontalOptions="End"
+                                            VerticalOptions="Center"
+                                            TextColor="Black"
+                                            Margin="0,0,10,0"
+                                            HorizontalTextAlignment="Center"/>
+                           </StackLayout>
+                           <ListView  
+                                SeparatorColor="DarkBlue"
+                                HorizontalOptions="Fill"                        
+                                Margin="10,0,10,0"
+                                VerticalOptions="Fill"
+                                x:Name="lvLista"
+                                HasUnevenRows="True"
+                                SelectedItem = "{Binding SelectedItem_Click, Mode=OneWay}"                
+                                ItemsSource="{Binding ItensToListView}">
+                                <ListView.ItemTemplate>
+                                     <DataTemplate>
+                                          <ViewCell Height="70">
+                                              
+                                               <StackLayout Orientation="Horizontal" 
+                                                             VerticalOptions="Fill"
+                                                             HorizontalOptions="Fill">
+                                                             <StackLayout Orientation="Vertical" 
+                                                                     VerticalOptions="Fill"
+                                                                     HorizontalOptions="StartAndExpand"
+                                                                     Spacing="1">
+                                                                     <StackLayout Orientation="Horizontal"
+                                                                                 VerticalOptions="Center"
+                                                                                 HorizontalOptions="StartAndExpand">
+                                                                                 <Label 
+                                                                                        Text="{Binding Nome}" 
+                                                                                        FontAttributes="Bold"
+                                                                                        Margin="1,8,0,0" 
+                                                                                        TextColor="Black"
+                                                                                        HorizontalOptions="Fill"
+                                                                                        HorizontalTextAlignment="Start" 
+                                                                                        FontSize="Medium"/>                                                                                                            
+                                                                    </StackLayout>
 
-        <ToolbarItem Command="{Binding AddItem}" 
-                     Order="Default" Priority="1" 
-                     Icon="add.png"/>
-</ContentPage.ToolbarItems>
-    <StackLayout HorizontalOptions="Fill" 
-                 VerticalOptions="Fill" 
-                 Padding="5,25,5,10">
-        <ListView  
-            SeparatorColor="Orange"
-            HorizontalOptions="Fill"
-            VerticalOptions="Fill"
-            x:Name="lvLista"
-            SelectedItem = "{Binding SelectedItem_Click, Mode=OneWay}"                
-            ItemsSource="{Binding ItensToListView}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell Height="100">
-                        <StackLayout Orientation="Horizontal" 
-                                     Spacing="10">
-                            <Image Source="carrin.png" 
-                                   HeightRequest="124" 
-                                   WidthRequest="90" 
-                                   HorizontalOptions="StartAndExpand" 
-                                   VerticalOptions="Center"/>
-                            <Label Text="{Binding Nome}" 
-                                   VerticalOptions="Center" 
-                                   TextColor="Green"
-                                   FontAttributes="Bold"
-                                   HorizontalOptions="CenterAndExpand"
-                                   HorizontalTextAlignment="Center" 
-                                   FontSize="20" 
-                                   Margin="0,0,40,0"/>
-                            <Label Text="{Binding Quantidade}" 
-                                   VerticalOptions="Center" 
-                                   HorizontalOptions="EndAndExpand"
-                                   FontAttributes="Bold"
-                                   HorizontalTextAlignment="End" 
-                                   FontSize="22" Margin="0,0,20,0" 
-                                   TextColor="Blue"/>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
+                                                                    <StackLayout Orientation="Horizontal"
+                                                                                 VerticalOptions="Center"
+                                                                                 HorizontalOptions="StartAndExpand">
+                                                                        
+                                                                                  <Label Text="{Binding Quantidade}" 
+                                                                                        HorizontalOptions="Start"
+                                                                                        FontAttributes="Bold"
+                                                                                        Margin="0,5,0,0" 
+                                                                                        HorizontalTextAlignment="Start" 
+                                                                                        FontSize="Medium" 
+                                                                                        TextColor="Green"/>                                                                            
+                                                        
+                                                                                 <Label Text="{Binding UnidadeMedida}" 
+                                                                                        HorizontalOptions="Fill"
+                                                                                        FontAttributes="Bold"
+                                                                                        Margin="0,5,0,0" 
+                                                                                        HorizontalTextAlignment="Start" 
+                                                                                        FontSize="Medium" 
+                                                                                        TextColor="Green"/>                                                                                                                                                                                                        
+                                                                    </StackLayout>
+                                                             </StackLayout>      
+                                                             <Image 
+                                                                Source="delete.png"
+                                                                HorizontalOptions="End"
+                                                                Scale="1"/>      
+                                                 </StackLayout>
+                                          </ViewCell>
+                                     </DataTemplate>
+                                </ListView.ItemTemplate>
+                          </ListView>
+            </StackLayout>
 </ContentPage>

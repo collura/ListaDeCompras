@@ -5,16 +5,25 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
+using Xamarin.Forms;
 
-namespace AgendaDeTarefas
+namespace ListaDeCompras
 {
     public class EditionPageViewModel : BindableBase, INavigationAware
     {
+        private ObservableCollection<Item> collection { get; set; }
+        private INavigationService Navigation { get; set; }
+        public string Nome { get; set; }
+        public string Quantidade { get; set; }
+        public string UnidadeMedida { get; set; }
+        public ICommand SalvarItem { get; set; }
 
-        private ObservableCollection<Item> collection;
-        public EditionPageViewModel()
+
+        public EditionPageViewModel(INavigationService navigationService)
         {
-            return;
+            SalvarItem = new Command(_salvarItem);
+            this.Navigation = navigationService;
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)
@@ -33,6 +42,11 @@ namespace AgendaDeTarefas
             {
                 collection = (ObservableCollection<Item>)parameters["ItensToListView"];
             }
+        }
+
+        private void _salvarItem() {
+            collection.Add(new Item() { Nome = Nome, Quantidade = Quantidade, UnidadeMedida = this.UnidadeMedida });
+            Navigation.GoBackAsync();
         }
     }
 }

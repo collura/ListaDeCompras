@@ -9,7 +9,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 
 
-namespace AgendaDeTarefas
+namespace ListaDeCompras
 {
     public class MainPageViewModel : BindableBase, INavigationAware
     {

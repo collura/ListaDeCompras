@@ -3,9 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="AgendaDeTarefas.EditionPage">
-    <StackLayout>
-        
-        
+             Title="Adicionar Item à lista"
+             x:Class="ListaDeCompras.EditionPage">
+            <StackLayout
+                Padding="15">
+                    <Label Text="Item a Comprar"/>
+                    <Entry Placeholder="Digite o Item" Text="{Binding Nome}"/>
+                    <Label Text="Quantidade"/>
+                    <Entry Placeholder="Digite a Quantidade" Text="{Binding Quantidade}"/>
+                    <Picker Title="Escolha a Unidade de Medida" SelectedItem="{Binding UnidadeMedida}">
+                        <Picker.SelectedIndex>0</Picker.SelectedIndex>
+                        <Picker.Items>
+                            <x:String>Unidades</x:String>
+                            <x:String>Gramas</x:String>
+                            <x:String>Kilos</x:String>
+                            <x:String>Litros</x:String>
+                            <x:String>Pacotes</x:String>
+                        </Picker.Items>
+                    </Picker>
+                    <Button Text="Salvar" Command="{Binding SalvarItem}"/>
     </StackLayout>  
 </ContentPage>

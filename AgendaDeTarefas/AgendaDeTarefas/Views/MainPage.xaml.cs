@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace AgendaDeTarefas
+namespace ListaDeCompras
 {
     public partial class MainPage : ContentPage
     {

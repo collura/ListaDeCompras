@@ -9,8 +9,8 @@
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AgendaDeTarefas.Droid</RootNamespace>
-    <AssemblyName>AgendaDeTarefas.Droid</AssemblyName>
+    <RootNamespace>ListaDeCompras.Droid</RootNamespace>
+    <AssemblyName>ListaDeCompras.Droid</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <AndroidApplication>true</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
@@ -134,9 +134,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />
-    <AndroidResource Include="Resources\drawable\add.png" />
     <AndroidResource Include="Resources\drawable\delete.png" />
-    <AndroidResource Include="Resources\drawable\carrin.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\addItem.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\addItem.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\addItem.png" />
+    <AndroidResource Include="Resources\drawable\addItem.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\delete.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\delete.png" />
+    <AndroidResource Include="Resources\drawable\menu.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\menu.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\menu.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\menu.png" />
+    <AndroidResource Include="Resources\drawable\history.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\history.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\history.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AgendaDeTarefas\ListaDeCompras.csproj">
