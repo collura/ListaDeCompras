@@ -148,6 +148,7 @@
     <AndroidResource Include="Resources\drawable\history.png" />
     <AndroidResource Include="Resources\drawable-hdpi\history.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\history.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\delete.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ListaDeCompras\ListaDeCompras.csproj">

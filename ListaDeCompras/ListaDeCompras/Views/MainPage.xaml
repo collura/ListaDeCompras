@@ -44,12 +44,7 @@
                                 VerticalOptions="Fill"
                                 x:Name="lvLista"                               
                                 HasUnevenRows="True"   
-                                ItemsSource="{Binding ItensToListView}">
-                                <ListView.Behaviors>
-                                    <b:EventToCommandBehavior EventName="ItemTapped" 
-                                                              Command="{Binding SelectedItem_Click}"
-                                                              EventArgsParameterPath="Item"/>
-                                </ListView.Behaviors>
+                                ItemsSource="{Binding ItensToListView}">    
                                 <ListView.ItemTemplate>                              
                                 <DataTemplate>
                                             <ViewCell Height="70">                                              
@@ -95,9 +90,16 @@
                                                                                             TextColor="Green"/>                                                                                                                                                                                                        
                                                                         </StackLayout>
                                                                  </StackLayout>
-                                                            <Image Source="delete.png"
-                                                                   HorizontalOptions="end">                                
-                                                            </Image>
+                                                                <Image 
+                                                                Source="delete.png"
+                                                                HorizontalOptions="End"
+                                                                Scale="1">                              
+                                                                <Image.Behaviors>
+                                                                    <b:EventToCommandBehavior EventName="ItemSelected" 
+                                                                    Command="{Binding SelectedItem_Click}"
+                                                                    EventArgsParameterPath="Item"/>
+                                                                </Image.Behaviors>
+                                                           </Image>    
                                                     </StackLayout>
                                             </ViewCell>
                                      </DataTemplate>
