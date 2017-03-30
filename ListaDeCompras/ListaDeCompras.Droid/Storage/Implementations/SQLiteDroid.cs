@@ -9,15 +9,15 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Xamarin.Forms;
 using System.IO;
 using ListaDeCompras;
 using SQLite;
+using Xamarin.Forms;
 
 [assembly: Dependency(typeof(SQLiteDroid))]
 namespace ListaDeCompras
 {
-    public class SQLiteDroid
+    public class SQLiteDroid:ISQLite
     {
         public SQLiteDroid() {
         }

@@ -47,7 +47,7 @@ namespace ListaDeCompras
 
         private void _salvarItem() {          
             collection.Add(new Item() { Nome = Nome, Quantidade = Quantidade, UnidadeMedida = this.UnidadeMedida });
-           // dbManager.SaveValue<Item>(item);
+            dbManager.SaveValue<Item>(new Item() { Nome = Nome, Quantidade = Quantidade, UnidadeMedida = this.UnidadeMedida });
             Navigation.GoBackAsync();
         }
     }

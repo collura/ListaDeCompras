@@ -20,8 +20,7 @@ namespace ListaDeCompras
         public ObservableCollection<Item> ItensToListView { get; set; }  
         public DelegateCommand AddItem { get; private set; }
         public ICommand ImageClick { get; private set; }
-
-
+        
 
         public MainPageViewModel(INavigationService navigationService, IPageDialogService dialogService)
         {

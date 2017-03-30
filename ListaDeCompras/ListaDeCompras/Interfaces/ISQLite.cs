@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ListaDeCompras.Interfaces
+namespace ListaDeCompras
 {
-    interface ISQLite
+    public interface ISQLite
     {
         SQLiteConnection GetConnection();
     }

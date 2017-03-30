@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ListaDeCompras.Storage;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -9,6 +10,8 @@ namespace ListaDeCompras
     {
         private ObservableCollection<Item> itens { get; set; }
         private bool IsBusy { get; set; }
+        private static DatabaseManager dbManager = new DatabaseManager();
+
 
         public MainPage()
         {
@@ -28,6 +31,7 @@ namespace ListaDeCompras
                 if (resp)
                 {
                     itens.Remove((Item)e.SelectedItem);
+                    dbManager.DeleteValue<Item>((Item)e.SelectedItem);
                 }
                 IsBusy = false;
             }                    
