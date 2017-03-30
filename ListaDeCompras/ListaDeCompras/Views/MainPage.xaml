@@ -6,48 +6,25 @@
              Title="Lista de Compras"               
              x:Class="ListaDeCompras.MainPage"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms">   
-            <ContentPage.ToolbarItems>
-                <ToolbarItem Order="Default" Priority="3" 
-                        Icon="menu.png"/>
-                <ToolbarItem Order="Default" Priority="2" 
-                        Icon="history.png"/>
+            <ContentPage.ToolbarItems>            
                 <ToolbarItem Command="{Binding AddItem}" 
                         Order="Default" Priority="1" 
                         Icon="addItem.png"/>
             </ContentPage.ToolbarItems> 
             <StackLayout HorizontalOptions="Fill"
-                         VerticalOptions="Fill">
-                         <StackLayout
-                                Orientation="Horizontal"
-                                HorizontalOptions="Fill"                     
-                                BackgroundColor="LightSteelBlue">
-                                        <Label Text="Qtd"
-                                            HorizontalOptions="Start"
-                                            TextColor="Black"
-                                            Margin="10,0,0,0"
-                                            VerticalOptions="Center"/>
-                                        <Label Text="Item a comprar"
-                                            HorizontalOptions="CenterAndExpand"
-                                            VerticalOptions="Center"
-                                            TextColor="Black"
-                                            HorizontalTextAlignment="Center"/>
-                                        <Label Text="Concluído"
-                                            HorizontalOptions="End"
-                                            VerticalOptions="Center"
-                                            TextColor="Black"
-                                            Margin="0,0,10,0"
-                                            HorizontalTextAlignment="Center"/>
-                           </StackLayout>
+                         Orientation="Vertical"
+                         VerticalOptions="Fill">                        
                            <ListView  
                                 SeparatorColor="DarkBlue"
                                 HorizontalOptions="Fill"                        
                                 VerticalOptions="Fill"
                                 x:Name="lvLista"                               
-                                HasUnevenRows="True"   
-                                ItemsSource="{Binding ItensToListView}">    
-                                <ListView.ItemTemplate>                              
+                                HasUnevenRows="false"                   
+                                SelectedItem="SelectedItem_click"
+                                ItemsSource="{Binding ItensToListView}">  
+                                <ListView.ItemTemplate>
                                 <DataTemplate>
-                                            <ViewCell Height="70">                                              
+                                            <ViewCell>                                              
                                                     <StackLayout Orientation="Horizontal" 
                                                                  VerticalOptions="Fill"
                                                                  HorizontalOptions="Fill"
@@ -90,16 +67,6 @@
                                                                                             TextColor="Green"/>                                                                                                                                                                                                        
                                                                         </StackLayout>
                                                                  </StackLayout>
-                                                                <Image 
-                                                                Source="delete.png"
-                                                                HorizontalOptions="End"
-                                                                Scale="1">                              
-                                                                <Image.Behaviors>
-                                                                    <b:EventToCommandBehavior EventName="ItemSelected" 
-                                                                    Command="{Binding SelectedItem_Click}"
-                                                                    EventArgsParameterPath="Item"/>
-                                                                </Image.Behaviors>
-                                                           </Image>    
                                                     </StackLayout>
                                             </ViewCell>
                                      </DataTemplate>

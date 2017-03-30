@@ -1,4 +1,5 @@
-﻿using Prism.Mvvm;
+﻿using ListaDeCompras.Storage;
+using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace ListaDeCompras
 {
-    public class Item : BindableBase
+    public class Item : BindableBase, IKeyObject
     {
+
+
         private string _nome;
         public string Nome {
             get { return _nome; }
@@ -38,6 +41,14 @@ namespace ListaDeCompras
         {
             get { return _preco; }
             set { SetProperty(ref _preco, value); }
+        }
+
+
+
+        public string Key
+        {
+            get;
+            set;
         }
     }
 }

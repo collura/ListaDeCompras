@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using ListaDeCompras.Storage;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using System;
@@ -13,6 +14,7 @@ namespace ListaDeCompras
     public class EditionPageViewModel : BindableBase, INavigationAware
     {
         private ObservableCollection<Item> collection { get; set; }
+        private static DatabaseManager dbManager = new DatabaseManager();
         private INavigationService Navigation { get; set; }
         public string Nome { get; set; }
         public string Quantidade { get; set; }
@@ -43,8 +45,9 @@ namespace ListaDeCompras
             }
         }
 
-        private void _salvarItem() {
+        private void _salvarItem() {          
             collection.Add(new Item() { Nome = Nome, Quantidade = Quantidade, UnidadeMedida = this.UnidadeMedida });
+           // dbManager.SaveValue<Item>(item);
             Navigation.GoBackAsync();
         }
     }

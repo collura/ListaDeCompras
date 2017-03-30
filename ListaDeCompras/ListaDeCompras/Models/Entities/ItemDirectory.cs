@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace ListaDeCompras
 {
+
+
     public class ItemDirectory
     {
-        public ObservableCollection<Item> itens { get; set; } = new ObservableCollection<Item>();
+        public ObservableCollection<Item> itens { get; set; }
     }
 }

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ListaDeCompras.Storage;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,19 +10,12 @@ namespace ListaDeCompras
 {
     public class ItemService
     {
+        private static DatabaseManager dbManager = new DatabaseManager();
        
         public static ItemDirectory LoadItens() {
             ItemDirectory itemDirectory = new ItemDirectory();
-
-                itemDirectory.itens.Add(new Item() { Nome = "Sabonete", Quantidade = "4", UnidadeMedida="Unidades"});
-                itemDirectory.itens.Add(new Item() { Nome = "Frios", Quantidade = "9", UnidadeMedida = "Gramas" });
-                itemDirectory.itens.Add(new Item() { Nome = "Gatorade", Quantidade = "5", UnidadeMedida = "Unidades" });
-                itemDirectory.itens.Add(new Item() { Nome = "Atum", Quantidade = "10", UnidadeMedida = "Unidades" });
-                itemDirectory.itens.Add(new Item() { Nome = "Pasta de Dente", Quantidade = "2", UnidadeMedida = "Unidades" });
-                itemDirectory.itens.Add(new Item() { Nome = "Escova de Dente", Quantidade = "2", UnidadeMedida = "Unidades" });
-                itemDirectory.itens.Add(new Item() { Nome = "Refrigerante", Quantidade = "8", UnidadeMedida = "Litros" });
-                itemDirectory.itens.Add(new Item() { Nome = "Alface", Quantidade = "2", UnidadeMedida = "Unidades" });
-            return itemDirectory;
+            itemDirectory.itens = new ObservableCollection<Item>(dbManager.GetAllItems<Item>());
+            return itemDirectory;       
         }
     }
 }
