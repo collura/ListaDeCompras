@@ -23,16 +23,17 @@ namespace ListaDeCompras
 
         private async void lvLista_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            ((ListView)sender).SelectedItem = null;
+            
             if (!IsBusy)
             {
                 IsBusy = true;
-                var resp = await DisplayAlert("Eliminar Item", "Item no Carrinho ?", "Sim", "Cancelar");
+                var resp = await DisplayAlert("Eliminar Item ?", null, "Sim", "Cancelar");
                 if (resp)
                 {
                     itens.Remove((Item)e.SelectedItem);
                     dbManager.DeleteValue<Item>((Item)e.SelectedItem);
                 }
+                ((ListView)sender).SelectedItem = null;
                 IsBusy = false;
             }                    
         }

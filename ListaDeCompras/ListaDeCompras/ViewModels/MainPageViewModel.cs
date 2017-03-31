@@ -50,12 +50,10 @@ namespace ListaDeCompras
 
         private void LoadList() {
 
-            ItemDirectory loadedItens = ItemService.LoadItens();
-            if (loadedItens != null)
-            {
+            ItemDirectory loadedItens = ItemService.LoadItens();         
                 foreach (var item in loadedItens.itens)
                     ItensToListView.Add(item);
-            }
+            
         }
 
 

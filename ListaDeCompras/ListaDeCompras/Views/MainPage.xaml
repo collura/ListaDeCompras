@@ -19,7 +19,7 @@
                                 HorizontalOptions="Fill"                        
                                 VerticalOptions="Fill"
                                 x:Name="lvLista"                               
-                                HasUnevenRows="false"                   
+                                HasUnevenRows="true"                   
                                 SelectedItem="SelectedItem_click"
                                 ItemsSource="{Binding ItensToListView}">  
                                 <ListView.ItemTemplate>

@@ -11,7 +11,7 @@ namespace ListaDeCompras.Storage
     
     public interface IKeyObject
     {
-        string Key { get; set; }
+        Int32 Key { get; set; }
     }
         
     public class DatabaseManager
@@ -61,7 +61,7 @@ namespace ListaDeCompras.Storage
         public TSource GetItem <TSource>(string Key) where TSource : IKeyObject, new()
         {
             var result = (from entry in database.Table<TSource>().AsEnumerable<TSource>()
-                       where entry.Key == Key
+                          where entry.Key.ToString() == Key
                        select entry).FirstOrDefault();       
             return result;
         }

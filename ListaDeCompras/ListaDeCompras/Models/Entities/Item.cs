@@ -1,10 +1,12 @@
 ﻿using ListaDeCompras.Storage;
 using Prism.Mvvm;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace ListaDeCompras
 {
@@ -44,8 +46,8 @@ namespace ListaDeCompras
         }
 
 
-
-        public string Key
+        [PrimaryKey, AutoIncrement]
+        public Int32 Key
         {
             get;
             set;
