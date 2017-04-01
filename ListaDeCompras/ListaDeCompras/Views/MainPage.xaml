@@ -66,11 +66,13 @@
                                                                                             FontSize="Medium" 
                                                                                             TextColor="Green"/>                                                                                                                                                                                                        
                                                                         </StackLayout>
-                                                                 </StackLayout>
+                                                                 </StackLayout>                                                        
                                                     </StackLayout>
                                             </ViewCell>
                                      </DataTemplate>
                                 </ListView.ItemTemplate>
                           </ListView>
+                        <Button Text="Salvar Lista" Command="{Binding SalvarLista}"/>
+                        <Button Text="Carregar Lista"/>
             </StackLayout>
 </ContentPage>

@@ -23,11 +23,11 @@ namespace ListaDeCompras
 
         private async void lvLista_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            
+            Item item = (Item)e.SelectedItem;
             if (!IsBusy)
             {
                 IsBusy = true;
-                var resp = await DisplayAlert("Eliminar Item ?", null, "Sim", "Cancelar");
+                var resp = await DisplayAlert("Eliminar " + item.Nome +" ?", "", "Sim", "Cancelar");
                 if (resp)
                 {
                     itens.Remove((Item)e.SelectedItem);

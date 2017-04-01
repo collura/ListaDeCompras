@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ListaDeCompras.Storage;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
+using Prism.Mvvm;
 
 namespace ListaDeCompras
 {
-
-
-    public class ItemDirectory
+    public class ItemDirectory : BindableBase
     {
-        public ObservableCollection<Item> itens { get; set; }
+        private ObservableCollection<Item> _itensList;
+        public ObservableCollection<Item> ItensList {
+            get { return _itensList; }
+            set{ SetProperty(ref _itensList, value); }
+         }
+      
     }
 }

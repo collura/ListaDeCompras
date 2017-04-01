@@ -2,6 +2,7 @@
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,6 +14,7 @@ namespace ListaDeCompras
 {
     public class EditionPageViewModel : BindableBase, INavigationAware
     {
+        private IPageDialogService Dialog { get; set; }
         private ObservableCollection<Item> collection { get; set; }
         private static DatabaseManager dbManager = new DatabaseManager();
         private INavigationService Navigation { get; set; }
@@ -21,10 +23,16 @@ namespace ListaDeCompras
         public string UnidadeMedida { get; set; }
         public ICommand SalvarItem { get; set; }
     
-        public EditionPageViewModel(INavigationService navigationService)
+        public EditionPageViewModel(INavigationService navigationService, IPageDialogService dialog)
         {
+            Dialog = dialog;
             SalvarItem = new Command(_salvarItem);
             this.Navigation = navigationService;
+            MessagingCenter.Subscribe<MainPage, ObservableCollection<Item>>(this, "collection", (sender, arg) =>
+            {
+                collection = arg;
+
+            });
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)
@@ -39,15 +47,19 @@ namespace ListaDeCompras
 
         public void OnNavigatingTo(NavigationParameters parameters)
         {
-            if (parameters.ContainsKey("ItensToListView"))
-            {
-                collection = (ObservableCollection<Item>)parameters["ItensToListView"];
-            }
+            //if (parameters.ContainsKey("ItensToListView"))
+            //{
+            //    collection = (ObservableCollection<Item>)parameters["ItensToListView"];
+            //}
+            return;
         }
 
         private void _salvarItem() {          
-            collection.Add(new Item() { Nome = Nome, Quantidade = Quantidade, UnidadeMedida = this.UnidadeMedida });
-            dbManager.SaveValue<Item>(new Item() {Nome = Nome, Quantidade = Quantidade, UnidadeMedida = this.UnidadeMedida });
+            collection.Add(new Item() { Nome = Nome, Quantidade = Quantidade,
+                UnidadeMedida = this.UnidadeMedida });
+            dbManager.SaveValue<Item>(new Item() {Nome = Nome,
+                Quantidade = Quantidade, UnidadeMedida = this.UnidadeMedida });
+            Dialog.DisplayAlertAsync(Nome + " foi Adicionado à lista !", null, "Ok");
             Navigation.GoBackAsync();
         }
     }
