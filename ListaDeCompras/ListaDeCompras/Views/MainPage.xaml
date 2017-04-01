@@ -2,10 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"  
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              Title="Lista de Compras"               
-             x:Class="ListaDeCompras.MainPage"
-             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms">   
+             x:Class="ListaDeCompras.MainPage">
+            
             <ContentPage.ToolbarItems>            
                 <ToolbarItem Command="{Binding AddItem}" 
                         Order="Default" Priority="1" 
@@ -13,24 +14,28 @@
             </ContentPage.ToolbarItems> 
             <StackLayout HorizontalOptions="Fill"
                          Orientation="Vertical"
-                         VerticalOptions="Fill">                        
+                         VerticalOptions="Fill">                          
                            <ListView  
                                 SeparatorColor="DarkBlue"
                                 HorizontalOptions="Fill"                        
-                                VerticalOptions="Fill"
-                                x:Name="lvLista"                               
-                                HasUnevenRows="true"                   
-                                SelectedItem="SelectedItem_click"
-                                ItemsSource="{Binding ItensToListView}">  
+                                VerticalOptions="FillAndExpand"
+                                HasUnevenRows="true" 
+                                x:Name="lv"
+                                ItemsSource="{Binding ItensToListView}">
+                                <ListView.Behaviors>
+                                    <b:EventToCommandBehavior EventName="ItemTapped" 
+                                                              Command="{Binding ItemClick}" 
+                                                              EventArgsParameterPath="Item"/>
+                                </ListView.Behaviors>                
                                 <ListView.ItemTemplate>
                                 <DataTemplate>
                                             <ViewCell>                                              
                                                     <StackLayout Orientation="Horizontal" 
-                                                                 VerticalOptions="Fill"
+                                                                 VerticalOptions="StartAndExpand"
                                                                  HorizontalOptions="Fill"
-                                                                 Margin="10,0,10,0">                                                    
+                                                                 Margin="20,0,20,0">                                                    
                                                                  <StackLayout Orientation="Vertical" 
-                                                                         VerticalOptions="Fill"
+                                                                         VerticalOptions="Start"
                                                                          HorizontalOptions="StartAndExpand"
                                                                          Spacing="1">
                                                                          <StackLayout Orientation="Horizontal"
@@ -45,18 +50,17 @@
                                                                                         HorizontalTextAlignment="Start" 
                                                                                         FontSize="Medium"/>                                                                                                            
                                                                         </StackLayout>
-
                                                                         <StackLayout Orientation="Horizontal"
                                                                                      VerticalOptions="Center"
                                                                                      HorizontalOptions="StartAndExpand">
                                                                         
                                                                                       <Label Text="{Binding Quantidade}" 
                                                                                             HorizontalOptions="Start"
-                                                                                            FontAttributes="Bold"
+                                                                                            FontAttributes="Bold"                                                                                            
                                                                                             Margin="0,5,0,0" 
                                                                                             HorizontalTextAlignment="Start" 
                                                                                             FontSize="Medium" 
-                                                                                            TextColor="Green"/>                                                                            
+                                                                                            TextColor="Brown"/>                                                                            
                                                         
                                                                                      <Label Text="{Binding UnidadeMedida}" 
                                                                                             HorizontalOptions="Fill"
@@ -64,7 +68,7 @@
                                                                                             Margin="0,5,0,0" 
                                                                                             HorizontalTextAlignment="Start" 
                                                                                             FontSize="Medium" 
-                                                                                            TextColor="Green"/>                                                                                                                                                                                                        
+                                                                                            TextColor="Brown"/>                                                                                                                                                                                                        
                                                                         </StackLayout>
                                                                  </StackLayout>                                                        
                                                     </StackLayout>
@@ -72,7 +76,47 @@
                                      </DataTemplate>
                                 </ListView.ItemTemplate>
                           </ListView>
-                        <Button Text="Salvar Lista" Command="{Binding SalvarLista}"/>
-                        <Button Text="Carregar Lista"/>
+                        <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Fill" HeightRequest="0.8" BackgroundColor="Black"/>
+                        <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Fill" HeightRequest="1" BackgroundColor="LightGray" Margin="-6"/>
+                        <StackLayout Orientation="Horizontal" 
+                                     HorizontalOptions="CenterAndExpand"
+                                     VerticalOptions="End"
+                                     Margin="0,-2,0,0"
+                                     BackgroundColor="LightBlue"
+                                     Spacing="20">
+                                    <Button VerticalOptions="End"
+                                            HorizontalOptions="Start"                                            
+                                            FontSize="9"     
+                                            WidthRequest="90"
+                                            Margin="10"
+                                            BorderRadius="80"
+                                            Image="save.png"                           
+                                            BackgroundColor="White" 
+                                            Command="{Binding SaveList}"
+                                            BorderColor="White"/>
+                            
+                                    <Button VerticalOptions="End"
+                                            HorizontalOptions="Center"                                          
+                                            FontSize="9"                                
+                                            BorderRadius="50"
+                                            Margin="10"
+                                            WidthRequest="90"
+                                            Image="delete.png"                                         
+                                            BackgroundColor="White" 
+                                            Command="{Binding DelItem}"
+                                            BorderColor="Black"/>
+
+                                    <Button VerticalOptions="End"
+                                            HorizontalOptions="End"                                           
+                                            FontSize="9"                                
+                                            BorderRadius="10"
+                                            Margin="10"
+                                            WidthRequest="90"
+                                            Image="menu.png"                           
+                                            BackgroundColor="White" 
+                                            Command="{Binding RecoverList}"
+                                            CommandParameter=""
+                                            BorderColor="White"/>
+                        </StackLayout>                       
             </StackLayout>
 </ContentPage>

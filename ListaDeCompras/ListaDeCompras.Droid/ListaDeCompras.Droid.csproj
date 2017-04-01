@@ -174,7 +174,13 @@
     <AndroidResource Include="Resources\drawable-hdpi\history.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\history.png" />
     <AndroidResource Include="Resources\drawable-hdpi\delete.png" />
-    <AndroidResource Include="Resources\drawable\delete.jpg" />
+    <AndroidResource Include="Resources\drawable-hdpi\clearList.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\clearList.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\clearList.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\save.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\save.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\save.png" />
+    <AndroidResource Include="Resources\drawable\delete.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ListaDeCompras\ListaDeCompras.csproj">

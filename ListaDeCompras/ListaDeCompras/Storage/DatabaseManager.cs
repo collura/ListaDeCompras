@@ -24,6 +24,7 @@ namespace ListaDeCompras.Storage
             database = DependencyService.Get<ISQLite>().GetConnection();
             //criando a tabela do Tipo Item
             database.CreateTable<Item>();
+            database.CreateTable<ListItems>();
         }
 
 
@@ -38,17 +39,32 @@ namespace ListaDeCompras.Storage
                 database.Update(value);
         }
 
-        //Metodo para deletar o Objeto
-        public void DeleteValue<T>(T value) where T : IKeyObject, new()
+
+        ////Metodo para deletar o Objeto
+        //public void DeleteValue<T>(T value) where T : IKeyObject, new()
+        //{
+        //    var all = (from entry in database.Table<T>().AsEnumerable<T>()
+        //               where entry.Key == value.Key
+        //               select entry).ToList();
+        //    if (all.Count == 1)
+        //        database.Delete(value);
+        //    else
+        //        throw new Exception("O Banco de Dados não contém o valor especificado !");
+        //}
+
+
+        //Metodo para recuperar uma lista salva
+        public void DeleteValueFromItem(string Key)
         {
-            var all = (from entry in database.Table<T>().AsEnumerable<T>()
-                       where entry.Key == value.Key
-                       select entry).ToList();
-            if (all.Count == 1)
-                database.Delete(value);
-            else
-                throw new Exception("O Banco de Dados não contém o valor especificado !");
+            database.Query<Item>("Delete from Item where Key = " + Key + ";");
         }
+
+
+        public void DeleteItemOfList(string Key)
+        {
+            database.Query<ListItems>("Delete from ListItems where ItemKey = " + Key + ";");
+        }
+
 
 
         //Método para obter todos os Objetos
@@ -57,11 +73,25 @@ namespace ListaDeCompras.Storage
             return database.Table<TSource>().AsEnumerable<TSource>().ToList();
         }
 
-        
+
+
+        //Metodo para recuperar uma lista salva
+        public List<Item> GetRecoverList(string descricao)
+        {
+            var all = database.Query<Item>(
+                    "select it.Key, li.Key, li.ItemKey, it.Nome, it.Quantidade, it.UnidadeMedida from Item it"
+                    + " join ListItems li"
+                    + " on it.Key = li.ItemKey where li.Descricao = ?",
+                    descricao).ToList();
+            return all;
+        }
+
+
+
         //Método para obter um objeto a partir de uma chave
         public TSource GetItem <TSource>(string Key) where TSource : IKeyObject, new()
         {
-            var result = (from entry in database.Table<TSource>().AsEnumerable<TSource>()
+            var result = (from entry in database.Table<TSource>().AsEnumerable()
                           where entry.Key.ToString() == Key
                        select entry).FirstOrDefault();       
             return result;

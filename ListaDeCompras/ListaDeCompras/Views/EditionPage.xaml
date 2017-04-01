@@ -7,10 +7,10 @@
              x:Class="ListaDeCompras.EditionPage">
             <StackLayout
                 Padding="15">
-                    <Label Text="Item a Comprar"/>
+                    <Label Text="Item a Comprar" TextColor="Brown"/>
                     <Entry Placeholder="Digite o Item" Text="{Binding Nome}"/>
-                    <Label Text="Quantidade"/>
-                    <Entry Placeholder="Digite a Quantidade" Text="{Binding Quantidade}"/>
+                    <Label Text="Quantidade" TextColor="Brown"/>
+                    <Entry Placeholder="Digite a Quantidade" Text="{Binding Quantidade}" Keyboard="Numeric"/>
                     <Picker Title="Escolha a Unidade de Medida" SelectedItem="{Binding UnidadeMedida}">
                         <Picker.SelectedIndex>0</Picker.SelectedIndex>
                         <Picker.Items>
@@ -21,6 +21,10 @@
                             <x:String>Pacotes</x:String>
                         </Picker.Items>
                     </Picker>
-                    <Button Text="Salvar" Command="{Binding SalvarItem}"/>
+                    <Button Image="save.png" 
+                            BackgroundColor="White" 
+                            HorizontalOptions="Start"
+                            Margin="0,20,0,0"
+                            Command="{Binding SalvarItem}"/>
     </StackLayout>  
 </ContentPage>
