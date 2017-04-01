@@ -57,11 +57,10 @@ namespace ListaDeCompras
 
 
         private async void _addItem() {
-            //navigationParameters = new NavigationParameters();
-            //navigationParameters.Add("ItensToListView", ItensToListView);   
-            await navigationService.NavigateAsync("EditionPage");
-            MessagingCenter.Send(this,"collection", ItensToListView);
-
+            navigationParameters = new NavigationParameters();
+            navigationParameters.Add("ItensToListView", ItensToListView);           
+            await navigationService.NavigateAsync("EditionPage", navigationParameters);
+            MessagingCenter.Send<MainPageViewModel>(this, "ItensToListView");
         }
 
         private async void _salvarLista() {

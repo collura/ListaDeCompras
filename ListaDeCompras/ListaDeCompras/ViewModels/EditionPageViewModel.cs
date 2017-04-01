@@ -28,10 +28,10 @@ namespace ListaDeCompras
             Dialog = dialog;
             SalvarItem = new Command(_salvarItem);
             this.Navigation = navigationService;
-            MessagingCenter.Subscribe<MainPage, ObservableCollection<Item>>(this, "collection", (sender, arg) =>
-            {
-                collection = arg;
 
+            MessagingCenter.Subscribe<MainPage>(this, "ItensToListView", (sender) =>
+            {
+                Dialog.DisplayAlertAsync("MessagingCenter Teste", "Entrou", "Ok");
             });
         }
 
@@ -47,14 +47,15 @@ namespace ListaDeCompras
 
         public void OnNavigatingTo(NavigationParameters parameters)
         {
-            //if (parameters.ContainsKey("ItensToListView"))
-            //{
-            //    collection = (ObservableCollection<Item>)parameters["ItensToListView"];
-            //}
-            return;
+            if (parameters.ContainsKey("ItensToListView"))
+            {
+                collection = (ObservableCollection<Item>)parameters["ItensToListView"];
+            }
+
         }
 
-        private void _salvarItem() {          
+        private void _salvarItem() {
+    
             collection.Add(new Item() { Nome = Nome, Quantidade = Quantidade,
                 UnidadeMedida = this.UnidadeMedida });
             dbManager.SaveValue<Item>(new Item() {Nome = Nome,
