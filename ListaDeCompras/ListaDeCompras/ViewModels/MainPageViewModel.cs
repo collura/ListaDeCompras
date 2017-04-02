@@ -55,6 +55,7 @@ namespace ListaDeCompras
 
         private async void _addItem()
         {
+
             navigationParameters = new NavigationParameters();
             navigationParameters.Add("ItensToListView", ItensToListView);
             await navigationService.NavigateAsync("EditionPage", navigationParameters);
