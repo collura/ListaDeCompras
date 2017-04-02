@@ -33,7 +33,7 @@ namespace ListaDeCompras
 
         public MainPageViewModel(INavigationService navigationService, IPageDialogService dialogService)
         {
-           
+            //Teste
             IsBusy = false;
             ItensToListView = new ObservableCollection<Item>();
             //LoadList();
