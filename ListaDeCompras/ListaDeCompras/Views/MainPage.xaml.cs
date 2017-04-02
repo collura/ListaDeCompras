@@ -9,16 +9,18 @@ namespace ListaDeCompras
     public partial class MainPage : ContentPage
     {
 
+        DatabaseManager m = new DatabaseManager();
 
         public MainPage()
         {
             InitializeComponent();
-           // lv.ItemSelected += _onItemSelected;                       
+            lv.ItemSelected += lv_ItemSelect;
         }
 
-        //private void _onItemSelected(object sender, SelectedItemChangedEventArgs e)
-        //{
-        //    ((ListView)sender).SelectedItem = null;
-        //}
+        private void lv_ItemSelect(object sender, SelectedItemChangedEventArgs e)
+        {
+            ListView l = (ListView)sender;
+            l.SelectedItem = null;
+        }
     }
 }

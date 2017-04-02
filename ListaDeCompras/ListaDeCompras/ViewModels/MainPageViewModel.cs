@@ -20,9 +20,8 @@ namespace ListaDeCompras
         public ObservableCollection<Item> ItensToListView { get; set; }
         public DelegateCommand AddItem { get; private set; }
         public ICommand SaveList { get; private set; }
-        public ICommand ItemClick { get; private set; }
-        public ICommand DelItem { get; private set; }
-        public ICommand RecoverList { get; private set; }
+        public ICommand ClearList { get; set; }
+        public ICommand ItemClick { get; set; }
         private Item _selectItem;
         public Item SelectItem
         {
@@ -31,20 +30,18 @@ namespace ListaDeCompras
         }
 
 
-        public MainPageViewModel(INavigationService navigationService, IPageDialogService dialogService)
+        public MainPageViewModel(INavigationService navigationService, 
+                                IPageDialogService dialogService)
         {
             //Teste
             IsBusy = false;
             ItensToListView = new ObservableCollection<Item>();
-            //LoadList();
+            LoadList();
             DbManager = new DatabaseManager();
             this.navigationService = navigationService;
             this.DialogService = dialogService;
             AddItem = new DelegateCommand(() => _addItem());
-            ItemClick = new Command((object obj) => _itemClick(obj));
-            DelItem = new Command(() => _deleteItemDb());
-            RecoverList = new Command(() => _recoverList());
-            SaveList = new DelegateCommand(() => _saveList());                        
+            ClearList = new Command(() => _clearLIst());
         }
 
 
@@ -65,64 +62,20 @@ namespace ListaDeCompras
         }
 
 
-        private async void _saveList()
-        {
-            if(ItensToListView.Count > 0) { 
-            ListItems list = new ListItems();
-            list.Descricao = "Lista";
-                if (ItensToListView.Count > 0)
-                {
-                    foreach (var item in ItensToListView)                                  
-                    list.ItemKey = item.Key;
-                    DbManager.SaveValue(list);               
-                    await DialogService.DisplayAlertAsync("Lista Salva Com sucesso !", "", "Ok");
-                }
-            }
-        }
-
-
-        private void _itemClick(object obj)
-        {      
-            SelectItem = (Item) obj;
-        }
-
-        private async void _deleteItemDb()
+        private async void _clearLIst()
         {
             if (!IsBusy) {
-                IsBusy = true;
-                if (SelectItem != null)
-                {
-                    var resp = await DialogService.DisplayAlertAsync("Remover o Item " + SelectItem.Nome + "definitivamente ?", "", "Sim", "Cancelar");
+                IsBusy = true;          
+                    var resp = await DialogService.DisplayAlertAsync(
+                        "Limpar Lista ?", "", "Sim", "Cancelar");
                     if (resp)
                     {
-                        ItensToListView.Remove(SelectItem);
-                        DbManager.DeleteItemOfList(SelectItem.Key.ToString());
-                        DbManager.DeleteValueFromItem(SelectItem.Key.ToString());                       
-                    }                   
-                }
-                else {
-                    await DialogService.DisplayAlertAsync("Selecione um Item", "", "Ok");
-                }
-                SelectItem = null;
+                    DbManager.DeleteAll();
+                    ItensToListView.Clear();
+                    }                                                                            
                 IsBusy = false;
             }
-        }
-
-
-
-
-        private void _recoverList() {
-            
-            var itens = new ObservableCollection<Item>(DbManager.GetRecoverList("Lista"));
-            if(itens != null) {
-                ItensToListView.Clear();
-                foreach (var item in itens)
-                {
-                    ItensToListView.Add(item);
-                }
-            }
-
-        }
+        }             
     }
 }
 

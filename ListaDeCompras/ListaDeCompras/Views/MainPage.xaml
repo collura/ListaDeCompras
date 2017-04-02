@@ -9,9 +9,13 @@
             
             <ContentPage.ToolbarItems>            
                 <ToolbarItem Command="{Binding AddItem}" 
-                        Order="Default" Priority="1" 
+                        Order="Default" Priority="2" 
                         Icon="addItem.png"/>
-            </ContentPage.ToolbarItems> 
+
+        <ToolbarItem Command="{Binding ClearList}" 
+                        Order="Default" Priority="1" 
+                        Icon="delete.png"/>
+    </ContentPage.ToolbarItems> 
             <StackLayout HorizontalOptions="Fill"
                          Orientation="Vertical"
                          VerticalOptions="Fill">                          
@@ -21,12 +25,7 @@
                                 VerticalOptions="FillAndExpand"
                                 HasUnevenRows="true" 
                                 x:Name="lv"
-                                ItemsSource="{Binding ItensToListView}">
-                                <ListView.Behaviors>
-                                    <b:EventToCommandBehavior EventName="ItemTapped" 
-                                                              Command="{Binding ItemClick}" 
-                                                              EventArgsParameterPath="Item"/>
-                                </ListView.Behaviors>                
+                                ItemsSource="{Binding ItensToListView}">                                       
                                 <ListView.ItemTemplate>
                                 <DataTemplate>
                                             <ViewCell>                                              
@@ -77,46 +76,5 @@
                                 </ListView.ItemTemplate>
                           </ListView>
                         <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Fill" HeightRequest="0.8" BackgroundColor="Black"/>
-                        <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Fill" HeightRequest="1" BackgroundColor="LightGray" Margin="-6"/>
-                        <StackLayout Orientation="Horizontal" 
-                                     HorizontalOptions="CenterAndExpand"
-                                     VerticalOptions="End"
-                                     Margin="0,-2,0,0"
-                                     BackgroundColor="LightBlue"
-                                     Spacing="20">
-                                    <Button VerticalOptions="End"
-                                            HorizontalOptions="Start"                                            
-                                            FontSize="9"     
-                                            WidthRequest="90"
-                                            Margin="10"
-                                            BorderRadius="80"
-                                            Image="save.png"                           
-                                            BackgroundColor="White" 
-                                            Command="{Binding SaveList}"
-                                            BorderColor="White"/>
-                            
-                                    <Button VerticalOptions="End"
-                                            HorizontalOptions="Center"                                          
-                                            FontSize="9"                                
-                                            BorderRadius="50"
-                                            Margin="10"
-                                            WidthRequest="90"
-                                            Image="delete.png"                                         
-                                            BackgroundColor="White" 
-                                            Command="{Binding DelItem}"
-                                            BorderColor="Black"/>
-
-                                    <Button VerticalOptions="End"
-                                            HorizontalOptions="End"                                           
-                                            FontSize="9"                                
-                                            BorderRadius="10"
-                                            Margin="10"
-                                            WidthRequest="90"
-                                            Image="menu.png"                           
-                                            BackgroundColor="White" 
-                                            Command="{Binding RecoverList}"
-                                            CommandParameter=""
-                                            BorderColor="White"/>
-                        </StackLayout>                       
-            </StackLayout>
+                </StackLayout> 
 </ContentPage>

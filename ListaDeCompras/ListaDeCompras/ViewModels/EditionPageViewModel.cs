@@ -28,13 +28,15 @@ namespace ListaDeCompras
         public string UnidadeMedida { get; set; }
         public ICommand SalvarItem { get; set; }
 
-        public EditionPageViewModel(INavigationService navigationService, IPageDialogService dialog)
+        public EditionPageViewModel(INavigationService navigationService, 
+                                    IPageDialogService dialog)
         {
             Dialog = dialog;
             SalvarItem = new Command(_salvarItem);
             this.Navigation = navigationService;
 
-            MessagingCenter.Subscribe<MainPageViewModel, ObservableCollection<Item>>(this, "teste", (sender, args) =>
+            MessagingCenter.Subscribe<MainPageViewModel, 
+            ObservableCollection<Item>>(this, "teste", (sender, args) =>
             {
                 collection = args;
             });
