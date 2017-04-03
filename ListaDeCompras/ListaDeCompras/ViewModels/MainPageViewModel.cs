@@ -3,7 +3,9 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
+using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -18,7 +20,7 @@ namespace ListaDeCompras
         private IPageDialogService DialogService { get; set; }
         private NavigationParameters navigationParameters;
         public ObservableCollection<Item> ItensToListView { get; set; }
-        public DelegateCommand AddItem { get; private set; }
+        public ICommand AddItem { get; private set; }
         public ICommand SaveList { get; private set; }
         public ICommand ClearList { get; set; }
         public ICommand ItemClick { get; set; }
@@ -27,20 +29,29 @@ namespace ListaDeCompras
         {
             get { return _selectItem; }
             set { SetProperty(ref _selectItem, value); }
+            
+        }
+             
+        private string _pathImage;
+        public string PathImage
+        {
+            get { return _pathImage; }
+            set { SetProperty(ref _pathImage, value); }
+
         }
 
 
         public MainPageViewModel(INavigationService navigationService, 
                                 IPageDialogService dialogService)
         {
-            //Teste
+            PathImage = "delete.png";
             IsBusy = false;
             ItensToListView = new ObservableCollection<Item>();
             LoadList();
             DbManager = new DatabaseManager();
             this.navigationService = navigationService;
             this.DialogService = dialogService;
-            AddItem = new DelegateCommand(() => _addItem());
+            AddItem = new Command(() => _addItem());
             ClearList = new Command(() => _clearLIst());
         }
 
@@ -60,6 +71,10 @@ namespace ListaDeCompras
             navigationParameters.Add("ItensToListView", ItensToListView);
             await navigationService.NavigateAsync("EditionPage", navigationParameters);
             MessagingCenter.Send(this, "teste", ItensToListView);
+            Debug.WriteLine("Debug", "TEste de Debug");
+            PathImage = "addItem.png";
+
+
         }
 
 

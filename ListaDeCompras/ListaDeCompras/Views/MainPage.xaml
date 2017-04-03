@@ -31,8 +31,16 @@
                                             <ViewCell>                                              
                                                     <StackLayout Orientation="Horizontal" 
                                                                  VerticalOptions="StartAndExpand"
-                                                                 HorizontalOptions="Fill"
-                                                                 Margin="20,0,20,0">                                                    
+                                                                 HorizontalOptions="Fill"                                                 
+                                                                 Margin="10,0,10,0">                                                                    
+                                                                 <Button Image = "addItem.png" 
+                                                                         BorderColor="Transparent"
+                                                                         Command="{Binding AddItem, Mode=TwoWay}"
+                                                                         Scale="0.8"
+                                                                         HorizontalOptions="Start"
+                                                                         BackgroundColor="Transparent"
+                                                                         />                                                           
+                                                                                                                                 
                                                                  <StackLayout Orientation="Vertical" 
                                                                          VerticalOptions="Start"
                                                                          HorizontalOptions="StartAndExpand"
@@ -69,7 +77,8 @@
                                                                                             FontSize="Medium" 
                                                                                             TextColor="Brown"/>                                                                                                                                                                                                        
                                                                         </StackLayout>
-                                                                 </StackLayout>                                                        
+                                                                 </StackLayout>  
+                                                          <Image Source="delete.png"/>
                                                     </StackLayout>
                                             </ViewCell>
                                      </DataTemplate>

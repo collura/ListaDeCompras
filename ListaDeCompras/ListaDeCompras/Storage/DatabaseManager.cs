@@ -30,7 +30,7 @@ namespace ListaDeCompras.Storage
 
         //Método para salvar o Objeto
         public void SaveValue<T>(T value) where T : IKeyObject, new() {
-            var all = (from entry in database.Table<T>().AsEnumerable<T>()
+            var all = (from entry in database.Table<T>().AsEnumerable()
                        where entry.Key == value.Key
                        select entry).ToList();
             if (all.Count == 0)

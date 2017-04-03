@@ -6,21 +6,13 @@ using SQLite;
 
 namespace ListaDeCompras
 {
-    public class ItemDirectory : BindableBase, IKeyObject
+    public class ItemDirectory : BindableBase
     {
         private ObservableCollection<Item> _itensList;
         public ObservableCollection<Item> ItensList
         {
             get { return _itensList; }
             set { SetProperty(ref _itensList, value); }
-        }
-
-
-        [PrimaryKey, AutoIncrement]
-        public int Key
-        {
-            get;
-            set;
-        }
+        }      
     }
 }

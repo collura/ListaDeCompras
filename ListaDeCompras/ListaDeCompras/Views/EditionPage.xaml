@@ -5,6 +5,9 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              Title="Adicionar Item à lista"
              x:Class="ListaDeCompras.EditionPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="save.png" Command="{Binding SalvarItem}" Priority="1"/>
+    </ContentPage.ToolbarItems>
             <StackLayout
                 Padding="15">
                     <Label Text="Item a Comprar" TextColor="Brown"/>
@@ -20,11 +23,6 @@
                             <x:String>Litros</x:String>
                             <x:String>Pacotes</x:String>
                         </Picker.Items>
-                    </Picker>
-                    <Button Image="save.png" 
-                            BackgroundColor="White" 
-                            HorizontalOptions="Start"
-                            Margin="0,20,0,0"
-                            Command="{Binding SalvarItem}"/>
+                    </Picker>                   
     </StackLayout>  
 </ContentPage>
