@@ -23,7 +23,6 @@ namespace ListaDeCompras
         public ICommand AddItem { get; private set; }
         public ICommand SaveList { get; private set; }
         public ICommand ClearList { get; set; }
-        public ICommand ItemClick { get; set; }
         private Item _selectItem;
         public Item SelectItem
         {
@@ -31,20 +30,18 @@ namespace ListaDeCompras
             set { SetProperty(ref _selectItem, value); }
             
         }
-             
-        private string _pathImage;
-        public string PathImage
+
+        private Image _pathImage;
+        public Image PathImage
         {
             get { return _pathImage; }
             set { SetProperty(ref _pathImage, value); }
-
         }
 
 
         public MainPageViewModel(INavigationService navigationService, 
                                 IPageDialogService dialogService)
         {
-            PathImage = "delete.png";
             IsBusy = false;
             ItensToListView = new ObservableCollection<Item>();
             LoadList();
@@ -53,6 +50,10 @@ namespace ListaDeCompras
             this.DialogService = dialogService;
             AddItem = new Command(() => _addItem());
             ClearList = new Command(() => _clearLIst());
+
+            MessagingCenter.Subscribe<MainPage>(this, "changeImage", (sender) => {                   
+                _ChangeImage();
+            });            
         }
 
 
@@ -72,7 +73,6 @@ namespace ListaDeCompras
             await navigationService.NavigateAsync("EditionPage", navigationParameters);
             MessagingCenter.Send(this, "teste", ItensToListView);
             Debug.WriteLine("Debug", "TEste de Debug");
-            PathImage = "addItem.png";
 
 
         }
@@ -91,7 +91,12 @@ namespace ListaDeCompras
                     }                                                                            
                 IsBusy = false;
             }
-        }             
+        }
+
+
+        private void _ChangeImage() {
+            PathImage.Source = "delete.png";
+        }
     }
 }
 

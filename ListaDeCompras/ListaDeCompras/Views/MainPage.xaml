@@ -33,7 +33,13 @@
                                                                  VerticalOptions="StartAndExpand"
                                                                  HorizontalOptions="Fill"                                                 
                                                                  Margin="10,0,10,0">                                                                    
-                                                                 <Image Source = "addItem.png" />                                                           
+                                                                 <Image Source = "{Binding PathImage.Source}"  
+                                                                 VerticalOptions="Center">
+                                                                <Image.GestureRecognizers>
+                                                                    <TapGestureRecognizer
+                                                                        Tapped="ImageClick"/>
+                                                                </Image.GestureRecognizers>>                                                                                                                                                                                                          
+                                                                 </Image>                                                           
                                                                                                                                  
                                                                  <StackLayout Orientation="Vertical" 
                                                                          VerticalOptions="Start"
