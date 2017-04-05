@@ -33,13 +33,13 @@
                                                                  VerticalOptions="StartAndExpand"
                                                                  HorizontalOptions="Fill"                                                 
                                                                  Margin="10,0,10,0">                                                                    
-                                                                 <Button Image = "addItem.png" 
-                                                                         BorderColor="Transparent"
-                                                                         Command="{Binding AddItem, Mode=TwoWay}"
-                                                                         Scale="0.8"
-                                                                         HorizontalOptions="Start"
-                                                                         BackgroundColor="Transparent"
-                                                                         />                                                           
+                                                                 <Image Source = "{Binding PathImage.Source}"  
+                                                                 VerticalOptions="Center">
+                                                                <Image.GestureRecognizers>
+                                                                    <TapGestureRecognizer
+                                                                        Tapped="ImageClick"/>
+                                                                </Image.GestureRecognizers>>                                                                                                                                                                                                          
+                                                                 </Image>                                                           
                                                                                                                                  
                                                                  <StackLayout Orientation="Vertical" 
                                                                          VerticalOptions="Start"

@@ -22,5 +22,10 @@ namespace ListaDeCompras
             ListView l = (ListView)sender;
             l.SelectedItem = null;
         }
+
+
+        public void ImageClick() {
+            MessagingCenter.Send(this, "changeImage");                       
+        }
     }
 }
