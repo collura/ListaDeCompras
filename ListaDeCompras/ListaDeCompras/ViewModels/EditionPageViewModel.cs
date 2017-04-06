@@ -35,11 +35,7 @@ namespace ListaDeCompras
             SalvarItem = new Command(_salvarItem);
             this.Navigation = navigationService;
 
-            MessagingCenter.Subscribe<MainPageViewModel, 
-            ObservableCollection<Item>>(this, "teste", (sender, args) =>
-            {
-                collection = args;
-            });
+            MessagingCenter.Subscribe<MainPageViewModel,ObservableCollection<Item>>(this, "ItensToListView", (sender, args) => {collection = args;});
         }
 
         private void _salvarItem()

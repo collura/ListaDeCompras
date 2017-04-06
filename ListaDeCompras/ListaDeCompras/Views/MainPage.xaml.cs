@@ -19,13 +19,14 @@ namespace ListaDeCompras
 
         private void lv_ItemSelect(object sender, SelectedItemChangedEventArgs e)
         {
-            ListView l = (ListView)sender;
-            l.SelectedItem = null;
+            Item item = (Item)e.SelectedItem;
+            ListView l = (ListView) sender;
+            MessagingCenter.Send(this, "getSelectedItem", item);            
         }
 
 
-        public void ImageClick() {
-            MessagingCenter.Send(this, "changeImage");                       
-        }
+        public void ImageClick(object obj) {
+            MessagingCenter.Send(this, "changeImage", obj);                       
+        }      
     }
 }

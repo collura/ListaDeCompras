@@ -7,13 +7,13 @@
              Title="Lista de Compras"               
              x:Class="ListaDeCompras.MainPage">
             
-            <ContentPage.ToolbarItems>            
-                <ToolbarItem Command="{Binding AddItem}" 
+            <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding AddItem}" 
                         Order="Default" Priority="2" 
                         Icon="addItem.png"/>
 
-        <ToolbarItem Command="{Binding ClearList}" 
-                        Order="Default" Priority="1" 
+        <ToolbarItem Command="{Binding DeleteItem}" 
+                        Order="Default" Priority="2" 
                         Icon="delete.png"/>
     </ContentPage.ToolbarItems> 
             <StackLayout HorizontalOptions="Fill"
@@ -23,9 +23,9 @@
                                 SeparatorColor="DarkBlue"
                                 HorizontalOptions="Fill"                        
                                 VerticalOptions="FillAndExpand"
-                                HasUnevenRows="true" 
+                                HasUnevenRows="true"                            
                                 x:Name="lv"
-                                ItemsSource="{Binding ItensToListView}">                                       
+                                ItemsSource="{Binding ItensToListView}">                               
                                 <ListView.ItemTemplate>
                                 <DataTemplate>
                                             <ViewCell>                                              
@@ -33,29 +33,31 @@
                                                                  VerticalOptions="StartAndExpand"
                                                                  HorizontalOptions="Fill"                                                 
                                                                  Margin="10,0,10,0">                                                                    
-                                                                 <Image Source = "{Binding PathImage.Source}"  
+                                                                 <Image Source = "itemDontAdded.png"  
+                                                                        Margin="0,5,10,0"
                                                                  VerticalOptions="Center">
                                                                 <Image.GestureRecognizers>
                                                                     <TapGestureRecognizer
-                                                                        Tapped="ImageClick"/>
+                                                                        Tapped="ImageClick"
+                                                                        TappedCallbackParameter="{Binding .}"/>
                                                                 </Image.GestureRecognizers>>                                                                                                                                                                                                          
                                                                  </Image>                                                           
                                                                                                                                  
                                                                  <StackLayout Orientation="Vertical" 
                                                                          VerticalOptions="Start"
                                                                          HorizontalOptions="StartAndExpand"
-                                                                         Spacing="1">
+                                                                         Spacing="5">
                                                                          <StackLayout Orientation="Horizontal"
                                                                                  VerticalOptions="Center"
                                                                                  HorizontalOptions="StartAndExpand">
                                                                                  <Label 
                                                                                         Text="{Binding Nome}" 
                                                                                         FontAttributes="Bold"
-                                                                                        Margin="1,8,0,0" 
-                                                                                        TextColor="Black"
+                                                                                        Margin="1,10,0,0" 
+                                                                                        TextColor="Brown"
                                                                                         HorizontalOptions="Fill"
                                                                                         HorizontalTextAlignment="Start" 
-                                                                                        FontSize="Medium"/>                                                                                                            
+                                                                                        FontSize="Large"/>                                                                                                            
                                                                         </StackLayout>
                                                                         <StackLayout Orientation="Horizontal"
                                                                                      VerticalOptions="Center"
@@ -63,27 +65,30 @@
                                                                         
                                                                                       <Label Text="{Binding Quantidade}" 
                                                                                             HorizontalOptions="Start"
-                                                                                            FontAttributes="Bold"                                                                                            
-                                                                                            Margin="0,5,0,0" 
+                                                                                            FontAttributes="Bold"                                                                                                                                                                                      
                                                                                             HorizontalTextAlignment="Start" 
                                                                                             FontSize="Medium" 
-                                                                                            TextColor="Brown"/>                                                                            
+                                                                                            TextColor="Black"/>                                                                            
                                                         
                                                                                      <Label Text="{Binding UnidadeMedida}" 
                                                                                             HorizontalOptions="Fill"
                                                                                             FontAttributes="Bold"
-                                                                                            Margin="0,5,0,0" 
                                                                                             HorizontalTextAlignment="Start" 
                                                                                             FontSize="Medium" 
-                                                                                            TextColor="Brown"/>                                                                                                                                                                                                        
+                                                                                            Margin="0,0,0,10"
+                                                                                            TextColor="Black"/>                                                                                                                                                                                                        
                                                                         </StackLayout>
-                                                                 </StackLayout>  
-                                                          <Image Source="delete.png"/>
+                                                                 </StackLayout>                                                                 
                                                     </StackLayout>
                                             </ViewCell>
                                      </DataTemplate>
                                 </ListView.ItemTemplate>
                           </ListView>
-                        <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Fill" HeightRequest="0.8" BackgroundColor="Black"/>
+                        <StackLayout 
+                            Orientation="Horizontal" 
+                            VerticalOptions="End" 
+                            HorizontalOptions="Fill" 
+                            HeightRequest="0.8" 
+                            BackgroundColor="Black"/>
                 </StackLayout> 
 </ContentPage>

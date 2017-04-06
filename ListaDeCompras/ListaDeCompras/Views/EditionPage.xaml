@@ -10,18 +10,19 @@
     </ContentPage.ToolbarItems>
             <StackLayout
                 Padding="15">
-                    <Label Text="Item a Comprar" TextColor="Brown"/>
-                    <Entry Placeholder="Digite o Item" Text="{Binding Nome}"/>
-                    <Label Text="Quantidade" TextColor="Brown"/>
-                    <Entry Placeholder="Digite a Quantidade" Text="{Binding Quantidade}" Keyboard="Numeric"/>
+                    <Label Text="Item a Comprar" TextColor="Brown" FontSize="Medium"/>
+                    <Entry Placeholder="Digite o Item" Text="{Binding Nome}" FontSize="Large"/>
+                    <Label Text="Quantidade" TextColor="Brown" FontSize="Medium"/>
+                    <Entry Placeholder="Digite a Quantidade" Text="{Binding Quantidade}" Keyboard="Numeric" FontSize="Large"/>
                     <Picker Title="Escolha a Unidade de Medida" SelectedItem="{Binding UnidadeMedida}">
                         <Picker.SelectedIndex>0</Picker.SelectedIndex>
                         <Picker.Items>
-                            <x:String>Unidades</x:String>
-                            <x:String>Gramas</x:String>
-                            <x:String>Kilos</x:String>
-                            <x:String>Litros</x:String>
-                            <x:String>Pacotes</x:String>
+                            <x:String>Unidade(s)</x:String>
+                            <x:String>Grama(s)</x:String>
+                            <x:String>Kilo(s)</x:String>
+                            <x:String>Litro(s)</x:String>
+                            <x:String>Pacote(s)</x:String>
+                             <x:String>Garrafa(s)</x:String>
                         </Picker.Items>
                     </Picker>                   
     </StackLayout>  

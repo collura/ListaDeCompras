@@ -18,21 +18,20 @@ namespace ListaDeCompras
         private ItemDirectory loadedItens { get; set; }
         private DatabaseManager DbManager { get; set; }
         private IPageDialogService DialogService { get; set; }
-        private NavigationParameters navigationParameters;
         public ObservableCollection<Item> ItensToListView { get; set; }
         public ICommand AddItem { get; private set; }
         public ICommand SaveList { get; private set; }
-        public ICommand ClearList { get; set; }
-        private Item _selectItem;
-        public Item SelectItem
+        public ICommand DeleteItem { get; set; }
+        private Item _selectedItem;
+        public Item SelectedItem
         {
-            get { return _selectItem; }
-            set { SetProperty(ref _selectItem, value); }
+            get { return _selectedItem; }
+            set { SetProperty(ref _selectedItem, value); }
             
         }
 
-        private Image _pathImage;
-        public Image PathImage
+        private string _pathImage;
+        public string PathImage
         {
             get { return _pathImage; }
             set { SetProperty(ref _pathImage, value); }
@@ -42,6 +41,7 @@ namespace ListaDeCompras
         public MainPageViewModel(INavigationService navigationService, 
                                 IPageDialogService dialogService)
         {
+            PathImage = "delete.png";
             IsBusy = false;
             ItensToListView = new ObservableCollection<Item>();
             LoadList();
@@ -49,11 +49,22 @@ namespace ListaDeCompras
             this.navigationService = navigationService;
             this.DialogService = dialogService;
             AddItem = new Command(() => _addItem());
-            ClearList = new Command(() => _clearLIst());
+            DeleteItem = new Command(() => _deleteItem());
 
-            MessagingCenter.Subscribe<MainPage>(this, "changeImage", (sender) => {                   
-                _ChangeImage();
-            });            
+            MessagingCenter.Subscribe<MainPage, Item>(this, "getSelectedItem", (sender, item) =>
+            {
+                SelectedItem = item;
+            });
+
+            MessagingCenter.Subscribe<MainPage>(this, "deleteItem", (sender) =>
+            {
+                _deleteItem();
+            });
+
+            MessagingCenter.Subscribe<MainPage, object>(this, "changeImage", (sender, obj) =>
+            {
+                _ChangeImage(obj);
+            });
         }
 
 
@@ -66,15 +77,9 @@ namespace ListaDeCompras
 
 
         private async void _addItem()
-        {
-
-            navigationParameters = new NavigationParameters();
-            navigationParameters.Add("ItensToListView", ItensToListView);
-            await navigationService.NavigateAsync("EditionPage", navigationParameters);
-            MessagingCenter.Send(this, "teste", ItensToListView);
-            Debug.WriteLine("Debug", "TEste de Debug");
-
-
+        {            
+            await navigationService.NavigateAsync("EditionPage");
+            MessagingCenter.Send(this, "ItensToListView", ItensToListView);
         }
 
 
@@ -83,7 +88,7 @@ namespace ListaDeCompras
             if (!IsBusy) {
                 IsBusy = true;          
                     var resp = await DialogService.DisplayAlertAsync(
-                        "Limpar Lista ?", "", "Sim", "Cancelar");
+                        "Limpar Lista", "Tem certeza que deseja LIMPAR todos os itens armazenados ?", "Sim", "Cancelar");
                     if (resp)
                     {
                     DbManager.DeleteAll();
@@ -94,8 +99,24 @@ namespace ListaDeCompras
         }
 
 
-        private void _ChangeImage() {
-            PathImage.Source = "delete.png";
+        private void _ChangeImage(object obj) {
+    
+            ((Image)obj).Source = "itemAdded.png";    
+        }
+
+
+        private async void _deleteItem()
+        {
+
+            if (SelectedItem != null) {
+                var resp = await DialogService.DisplayAlertAsync("Apagar Item", "Tem certeza que deseja apagar o item " + 
+                                                                  SelectedItem.Nome + " da lista ?", "Sim", "Cancelar");
+                if (resp)
+                {
+                    ItensToListView.Remove(SelectedItem);
+                    DbManager.DeleteValue(SelectedItem);
+                }
+            }
         }
     }
 }
