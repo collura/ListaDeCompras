@@ -33,13 +33,20 @@ namespace ListaDeCompras
             set { SetProperty(ref _unidadeMedida, value); }
         }
 
-
-
+        
         private double _preco;
         public double Preco
         {
             get { return _preco; }
             set { SetProperty(ref _preco, value); }
+        }
+
+
+        private bool _noCarrinho;
+        public bool NoCarrinho
+        {
+            get { return _noCarrinho; }
+            set { SetProperty(ref _noCarrinho, value); }
         }
 
 

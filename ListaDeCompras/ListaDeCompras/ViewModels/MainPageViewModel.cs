@@ -101,7 +101,8 @@ namespace ListaDeCompras
 
         private void _ChangeImage(object obj) {
     
-            ((Image)obj).Source = "itemAdded.png";    
+            ((Image)obj).Source = "itemAdded.png";
+            SelectedItem.NoCarrinho = true;   
         }
 
 

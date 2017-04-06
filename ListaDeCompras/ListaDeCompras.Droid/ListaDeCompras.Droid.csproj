@@ -178,10 +178,10 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\save.png" />
     <AndroidResource Include="Resources\drawable\delete.png" />
     <AndroidResource Include="Resources\drawable\itemAdded.png" />
-    <AndroidResource Include="Resources\drawable\itemDontAdded.png" />
     <AndroidResource Include="Resources\drawable-hdpi\itemAdded.png" />
     <AndroidResource Include="Resources\drawable-hdpi\itemDontAdded.png" />
     <AndroidResource Include="Resources\drawable\clearList.png" />
+    <AndroidResource Include="Resources\drawable\itemDontAdded.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ListaDeCompras\ListaDeCompras.csproj">
