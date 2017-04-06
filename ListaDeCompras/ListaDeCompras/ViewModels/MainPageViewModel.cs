@@ -101,8 +101,7 @@ namespace ListaDeCompras
 
         private void _ChangeImage(object obj) {
     
-            ((Image)obj).Source = "itemAdded.png";
-            SelectedItem.NoCarrinho = true;   
+            ((Image)obj).Source = "itemAdded.png";           
         }
 
 
@@ -116,6 +115,7 @@ namespace ListaDeCompras
                 {
                     ItensToListView.Remove(SelectedItem);
                     DbManager.DeleteValue(SelectedItem);
+                    SelectedItem = null;
                 }
             }
         }

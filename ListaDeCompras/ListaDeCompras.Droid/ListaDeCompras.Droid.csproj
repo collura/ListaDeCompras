@@ -45,7 +45,17 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
-    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <AndroidLinkMode>Full</AndroidLinkMode>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <BundleAssemblies>False</BundleAssemblies>
+    <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+    <Debugger>.Net (Xamarin)</Debugger>
+    <AotAssemblies>False</AotAssemblies>
+    <EnableLLVM>False</EnableLLVM>
+    <AndroidEnableMultiDex>False</AndroidEnableMultiDex>
+    <EnableProguard>False</EnableProguard>
+    <DebugSymbols>False</DebugSymbols>
+    <AndroidSupportedAbis>armeabi;armeabi-v7a;x86;x86_64;arm64-v8a</AndroidSupportedAbis>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FormsViewGroup, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -133,6 +143,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Splash.cs" />
     <Compile Include="Storage\Implementations\SQLiteDroid.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -153,7 +164,9 @@
     <AndroidResource Include="Resources\layout\tabs.xml" />
     <AndroidResource Include="Resources\layout\toolbar.xml" />
     <AndroidResource Include="Resources\values\colors.xml" />
-    <AndroidResource Include="Resources\values\styles.xml" />
+    <AndroidResource Include="Resources\values\styles.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\values-v21\styles.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -164,15 +177,7 @@
     <AndroidResource Include="Resources\drawable\addItem.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\delete.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\delete.png" />
-    <AndroidResource Include="Resources\drawable\menu.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\menu.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\menu.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\menu.png" />
-    <AndroidResource Include="Resources\drawable\history.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\history.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\history.png" />
     <AndroidResource Include="Resources\drawable-hdpi\delete.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\clearList.png" />
     <AndroidResource Include="Resources\drawable-hdpi\save.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\save.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\save.png" />
@@ -180,8 +185,11 @@
     <AndroidResource Include="Resources\drawable\itemAdded.png" />
     <AndroidResource Include="Resources\drawable-hdpi\itemAdded.png" />
     <AndroidResource Include="Resources\drawable-hdpi\itemDontAdded.png" />
-    <AndroidResource Include="Resources\drawable\clearList.png" />
     <AndroidResource Include="Resources\drawable\itemDontAdded.png" />
+    <AndroidResource Include="Resources\drawable\Splash.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\Splash.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Splash.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\splash.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ListaDeCompras\ListaDeCompras.csproj">
