@@ -2,6 +2,7 @@
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,44 +12,48 @@ using Xamarin.Forms;
 
 namespace ListaDeCompras
 {
-    public class EditionPageViewModel : BindableBase, INavigationAware
+    public class EditionPageViewModel : BindableBase
     {
+        private IPageDialogService Dialog { get; set; }
         private ObservableCollection<Item> collection { get; set; }
         private static DatabaseManager dbManager = new DatabaseManager();
         private INavigationService Navigation { get; set; }
-        public string Nome { get; set; }
+        private string _nome;
+        public string Nome
+        {
+            get { return _nome; }
+            set { SetProperty(ref _nome, value); }
+        }
         public string Quantidade { get; set; }
         public string UnidadeMedida { get; set; }
         public ICommand SalvarItem { get; set; }
-    
-        public EditionPageViewModel(INavigationService navigationService)
+
+        public EditionPageViewModel(INavigationService navigationService, 
+                                    IPageDialogService dialog)
         {
+            Dialog = dialog;
             SalvarItem = new Command(_salvarItem);
             this.Navigation = navigationService;
+
+            MessagingCenter.Subscribe<MainPageViewModel,ObservableCollection<Item>>(this, "ItensToListView", (sender, args) => {collection = args;});
         }
 
-        public void OnNavigatedFrom(NavigationParameters parameters)
+        private void _salvarItem()
         {
-            return;
-        }
-
-        public void OnNavigatedTo(NavigationParameters parameters)
-        {
-            return;
-        }
-
-        public void OnNavigatingTo(NavigationParameters parameters)
-        {
-            if (parameters.ContainsKey("ItensToListView"))
+            if (Nome == null || Quantidade == null || UnidadeMedida == null)
             {
-                collection = (ObservableCollection<Item>)parameters["ItensToListView"];
+                Dialog.DisplayAlertAsync("", "Preencha todos os campos !", "Ok");
             }
-        }
-
-        private void _salvarItem() {          
-            collection.Add(new Item() { Nome = Nome, Quantidade = Quantidade, UnidadeMedida = this.UnidadeMedida });
-            dbManager.SaveValue<Item>(new Item() {Nome = Nome, Quantidade = Quantidade, UnidadeMedida = this.UnidadeMedida });
-            Navigation.GoBackAsync();
+            else
+            {
+                Item item = new Item();
+                item.Nome = Nome;
+                item.Quantidade = Quantidade;
+                item.UnidadeMedida = UnidadeMedida;
+                dbManager.SaveValue(item);
+                collection.Add(item);
+                Navigation.GoBackAsync();
+            }
         }
     }
 }
