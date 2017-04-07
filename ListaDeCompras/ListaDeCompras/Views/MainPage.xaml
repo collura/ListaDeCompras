@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"  
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:local="clr-namespace:WorkingWithTriggers;assembly=WorkingWithTriggers"
              prism:ViewModelLocator.AutowireViewModel="True"
              Title="Lista de Compras"               
              x:Class="ListaDeCompras.MainPage">
@@ -35,7 +36,7 @@
                                                                  Margin="10,0,10,0">                                                                    
                                                                  <Image Source = "itemDontAdded.png"  
                                                                         Margin="0,5,10,0"
-                                                                 VerticalOptions="Center">
+                                                                 VerticalOptions="Center">                                                                                                                         
                                                                 <Image.GestureRecognizers>
                                                                     <TapGestureRecognizer
                                                                         Tapped="ImageClick"

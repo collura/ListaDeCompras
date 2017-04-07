@@ -52,7 +52,6 @@ namespace ListaDeCompras
                 item.UnidadeMedida = UnidadeMedida;
                 dbManager.SaveValue(item);
                 collection.Add(item);
-                Dialog.DisplayAlertAsync(Nome + " foi Adicionado à lista !", null, "Ok");
                 Navigation.GoBackAsync();
             }
         }
