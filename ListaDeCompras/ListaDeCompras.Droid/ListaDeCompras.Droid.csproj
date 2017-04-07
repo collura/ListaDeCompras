@@ -46,6 +46,16 @@
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <BundleAssemblies>False</BundleAssemblies>
+    <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+    <Debugger>.Net (Xamarin)</Debugger>
+    <AotAssemblies>False</AotAssemblies>
+    <EnableLLVM>False</EnableLLVM>
+    <AndroidEnableMultiDex>False</AndroidEnableMultiDex>
+    <EnableProguard>False</EnableProguard>
+    <DebugSymbols>False</DebugSymbols>
+    <AndroidSupportedAbis>armeabi;armeabi-v7a;x86;x86_64;arm64-v8a</AndroidSupportedAbis>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FormsViewGroup, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -71,25 +81,23 @@
     <Reference Include="SQLite-net, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\sqlite-net-pcl.1.3.1\lib\netstandard1.1\SQLite-net.dll</HintPath>
     </Reference>
+    <Reference Include="SQLitePCL.raw, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SQLitePCL.raw.0.9.4-pre1\lib\MonoAndroid\SQLitePCL.raw.dll</HintPath>
+    </Reference>
     <Reference Include="SQLitePCLRaw.batteries_green, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a84b7dcfb1391f7f, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SQLitePCLRaw.bundle_green.1.1.2\lib\MonoAndroid\SQLitePCLRaw.batteries_green.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\packages\SQLitePCLRaw.bundle_green.1.1.3-pre20170220084037\lib\MonoAndroid\SQLitePCLRaw.batteries_green.dll</HintPath>
     </Reference>
     <Reference Include="SQLitePCLRaw.batteries_v2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8226ea5df37bcae9, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SQLitePCLRaw.bundle_green.1.1.2\lib\MonoAndroid\SQLitePCLRaw.batteries_v2.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\packages\SQLitePCLRaw.bundle_green.1.1.3-pre20170220084037\lib\MonoAndroid\SQLitePCLRaw.batteries_v2.dll</HintPath>
     </Reference>
     <Reference Include="SQLitePCLRaw.core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SQLitePCLRaw.core.1.1.2\lib\MonoAndroid\SQLitePCLRaw.core.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\packages\SQLitePCLRaw.core.1.1.3-pre20170220084037\lib\MonoAndroid\SQLitePCLRaw.core.dll</HintPath>
     </Reference>
     <Reference Include="SQLitePCLRaw.lib.e_sqlite3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e4ad490600e2234c, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SQLitePCLRaw.lib.e_sqlite3.android.1.1.2\lib\MonoAndroid\SQLitePCLRaw.lib.e_sqlite3.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\packages\SQLitePCLRaw.lib.e_sqlite3.android.1.1.3-pre20170220084037\lib\MonoAndroid\SQLitePCLRaw.lib.e_sqlite3.dll</HintPath>
     </Reference>
     <Reference Include="SQLitePCLRaw.provider.e_sqlite3, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9c301db686d0bd12, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SQLitePCLRaw.provider.e_sqlite3.android.1.1.2\lib\MonoAndroid\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\packages\SQLitePCLRaw.provider.e_sqlite3.android.1.1.3-pre20170220084037\lib\MonoAndroid\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -135,6 +143,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Splash.cs" />
     <Compile Include="Storage\Implementations\SQLiteDroid.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -155,7 +164,9 @@
     <AndroidResource Include="Resources\layout\tabs.xml" />
     <AndroidResource Include="Resources\layout\toolbar.xml" />
     <AndroidResource Include="Resources\values\colors.xml" />
-    <AndroidResource Include="Resources\values\styles.xml" />
+    <AndroidResource Include="Resources\values\styles.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\values-v21\styles.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -166,15 +177,19 @@
     <AndroidResource Include="Resources\drawable\addItem.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\delete.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\delete.png" />
-    <AndroidResource Include="Resources\drawable\menu.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\menu.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\menu.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\menu.png" />
-    <AndroidResource Include="Resources\drawable\history.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\history.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\history.png" />
     <AndroidResource Include="Resources\drawable-hdpi\delete.png" />
-    <AndroidResource Include="Resources\drawable\delete.jpg" />
+    <AndroidResource Include="Resources\drawable-hdpi\save.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\save.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\save.png" />
+    <AndroidResource Include="Resources\drawable\delete.png" />
+    <AndroidResource Include="Resources\drawable\itemAdded.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\itemAdded.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\itemDontAdded.png" />
+    <AndroidResource Include="Resources\drawable\itemDontAdded.png" />
+    <AndroidResource Include="Resources\drawable\Splash.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\Splash.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Splash.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\splash.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ListaDeCompras\ListaDeCompras.csproj">
@@ -189,11 +204,9 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets'))" />
     <Error Condition="!Exists('..\..\packages\Xamarin.Forms.2.3.4.221-pre6\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Xamarin.Forms.2.3.4.221-pre6\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets'))" />
-    <Error Condition="!Exists('..\..\packages\SQLitePCL.raw.0.8.0\build\MonoAndroid\SQLitePCL.raw.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\SQLitePCL.raw.0.8.0\build\MonoAndroid\SQLitePCL.raw.targets'))" />
   </Target>
   <Import Project="..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.Vector.Drawable.23.3.0\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.4.221-pre6\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.221-pre6\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
-  <Import Project="..\..\packages\SQLitePCL.raw.0.8.0\build\MonoAndroid\SQLitePCL.raw.targets" Condition="Exists('..\..\packages\SQLitePCL.raw.0.8.0\build\MonoAndroid\SQLitePCL.raw.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
      Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

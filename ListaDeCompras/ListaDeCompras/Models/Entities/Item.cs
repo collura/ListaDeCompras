@@ -2,10 +2,7 @@
 using Prism.Mvvm;
 using SQLite;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 
 namespace ListaDeCompras
@@ -36,8 +33,7 @@ namespace ListaDeCompras
             set { SetProperty(ref _unidadeMedida, value); }
         }
 
-
-
+        
         private double _preco;
         public double Preco
         {
@@ -46,8 +42,16 @@ namespace ListaDeCompras
         }
 
 
+        private bool _noCarrinho;
+        public bool NoCarrinho
+        {
+            get { return _noCarrinho; }
+            set { SetProperty(ref _noCarrinho, value); }
+        }
+
+
         [PrimaryKey, AutoIncrement]
-        public Int32 Key
+        public int Key
         {
             get;
             set;

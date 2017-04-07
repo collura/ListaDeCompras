@@ -1,6 +1,7 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace ListaDeCompras.Storage
     
     public interface IKeyObject
     {
-        Int32 Key { get; set; }
+        int Key { get; set; }
     }
         
     public class DatabaseManager
@@ -23,12 +24,13 @@ namespace ListaDeCompras.Storage
             database = DependencyService.Get<ISQLite>().GetConnection();
             //criando a tabela do Tipo Item
             database.CreateTable<Item>();
+            database.CreateTable<ListItems>();
         }
 
 
         //Método para salvar o Objeto
         public void SaveValue<T>(T value) where T : IKeyObject, new() {
-            var all = (from entry in database.Table<T>().AsEnumerable<T>()
+            var all = (from entry in database.Table<T>().AsEnumerable()
                        where entry.Key == value.Key
                        select entry).ToList();
             if (all.Count == 0)
@@ -36,6 +38,7 @@ namespace ListaDeCompras.Storage
             else
                 database.Update(value);
         }
+
 
         //Metodo para deletar o Objeto
         public void DeleteValue<T>(T value) where T : IKeyObject, new()
@@ -50,17 +53,25 @@ namespace ListaDeCompras.Storage
         }
 
 
+        //Metodo para deletar tudo
+        public void DeleteAll()
+        {           
+                database.DeleteAll<Item>();           
+        }
+
         //Método para obter todos os Objetos
         public List<TSource> GetAllItems<TSource>() where TSource : IKeyObject, new()
         {
             return database.Table<TSource>().AsEnumerable<TSource>().ToList();
         }
 
-        
+
+
+
         //Método para obter um objeto a partir de uma chave
         public TSource GetItem <TSource>(string Key) where TSource : IKeyObject, new()
         {
-            var result = (from entry in database.Table<TSource>().AsEnumerable<TSource>()
+            var result = (from entry in database.Table<TSource>().AsEnumerable()
                           where entry.Key.ToString() == Key
                        select entry).FirstOrDefault();       
             return result;

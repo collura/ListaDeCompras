@@ -14,7 +14,7 @@ namespace ListaDeCompras
        
         public static ItemDirectory LoadItens() {
             ItemDirectory itemDirectory = new ItemDirectory();
-            itemDirectory.itens = new ObservableCollection<Item>(dbManager.GetAllItems<Item>());
+            itemDirectory.ItensList = new ObservableCollection<Item>(dbManager.GetAllItems<Item>());
             return itemDirectory;       
         }
     }

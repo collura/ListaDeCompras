@@ -1,68 +1,124 @@
-﻿using Prism.Commands;
+﻿using ListaDeCompras.Storage;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
+using System.Diagnostics;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-
 namespace ListaDeCompras
 {
-    public class MainPageViewModel : BindableBase, INavigationAware
+    public class MainPageViewModel : BindableBase
     {
-        private INavigationService navigationService { get; set; }
+        private INavigationService navigationService { get; set; }        
+        private bool IsBusy { get; set; }
+        private ItemDirectory loadedItens { get; set; }
+        private DatabaseManager DbManager { get; set; }
         private IPageDialogService DialogService { get; set; }
-        private NavigationParameters navigationParameters;
-        public ObservableCollection<Item> ItensToListView { get; set; }  
-        public DelegateCommand AddItem { get; private set; }
-        public ICommand ImageClick { get; private set; }
-        
-
-        public MainPageViewModel(INavigationService navigationService, IPageDialogService dialogService)
+        public ObservableCollection<Item> ItensToListView { get; set; }
+        public ICommand AddItem { get; private set; }
+        public ICommand SaveList { get; private set; }
+        public ICommand DeleteItem { get; set; }
+        private Item _selectedItem;
+        public Item SelectedItem
         {
-            this.navigationService = navigationService;
-            this.DialogService = dialogService;
-            AddItem = new DelegateCommand(() => _addItem());
-            ItensToListView = new ObservableCollection<Item>();
-            LoadList();
-        }
-
-        public void OnNavigatedFrom(NavigationParameters parameters)
-        {
-            return;
-        }
-    
-
-        public void OnNavigatingTo(NavigationParameters parameters)
-        {
-            return;
-        }
-
-        public void OnNavigatedTo(NavigationParameters parameters)
-        {
-            return;
-        }
-    
-
-        private void LoadList() {
-
-            ItemDirectory loadedItens = ItemService.LoadItens();         
-                foreach (var item in loadedItens.itens)
-                    ItensToListView.Add(item);
+            get { return _selectedItem; }
+            set { SetProperty(ref _selectedItem, value); }
             
         }
 
-
-        private async void _addItem() {
-            navigationParameters = new NavigationParameters();
-            navigationParameters.Add("ItensToListView", ItensToListView);   
-            await navigationService.NavigateAsync("EditionPage", navigationParameters);
+        private string _pathImage;
+        public string PathImage
+        {
+            get { return _pathImage; }
+            set { SetProperty(ref _pathImage, value); }
         }
 
-   
+
+        public MainPageViewModel(INavigationService navigationService, 
+                                IPageDialogService dialogService)
+        {
+            PathImage = "delete.png";
+            IsBusy = false;
+            ItensToListView = new ObservableCollection<Item>();
+            LoadList();
+            DbManager = new DatabaseManager();
+            this.navigationService = navigationService;
+            this.DialogService = dialogService;
+            AddItem = new Command(() => _addItem());
+            DeleteItem = new Command(() => _deleteItem());
+
+            MessagingCenter.Subscribe<MainPage, Item>(this, "getSelectedItem", (sender, item) =>
+            {
+                SelectedItem = item;
+            });
+
+            MessagingCenter.Subscribe<MainPage>(this, "deleteItem", (sender) =>
+            {
+                _deleteItem();
+            });
+
+            MessagingCenter.Subscribe<MainPage, object>(this, "changeImage", (sender, obj) =>
+            {
+                _ChangeImage(obj);
+            });
+        }
+
+
+        private void LoadList()
+        {
+            loadedItens = ItemService.LoadItens();
+            foreach (var item in loadedItens.ItensList)
+                ItensToListView.Add(item);
+        }
+
+
+        private async void _addItem()
+        {            
+            await navigationService.NavigateAsync("EditionPage");
+            MessagingCenter.Send(this, "ItensToListView", ItensToListView);
+        }
+
+
+        private async void _clearLIst()
+        {
+            if (!IsBusy) {
+                IsBusy = true;          
+                    var resp = await DialogService.DisplayAlertAsync(
+                        "Limpar Lista", "Tem certeza que deseja LIMPAR todos os itens armazenados ?", "Sim", "Cancelar");
+                    if (resp)
+                    {
+                    DbManager.DeleteAll();
+                    ItensToListView.Clear();
+                    }                                                                            
+                IsBusy = false;
+            }
+        }
+
+
+        private void _ChangeImage(object obj) {
+    
+            ((Image)obj).Source = "itemAdded.png";           
+        }
+
+
+        private async void _deleteItem()
+        {
+
+            if (SelectedItem != null) {
+                var resp = await DialogService.DisplayAlertAsync("Apagar Item", "Tem certeza que deseja apagar o item " + 
+                                                                  SelectedItem.Nome + " da lista ?", "Sim", "Cancelar");
+                if (resp)
+                {
+                    ItensToListView.Remove(SelectedItem);
+                    DbManager.DeleteValue(SelectedItem);
+                    SelectedItem = null;
+                }
+            }
+        }
     }
 }
+
