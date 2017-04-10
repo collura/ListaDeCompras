@@ -48,19 +48,10 @@ namespace ListaDeCompras
             DbManager = new DatabaseManager();
             this.navigationService = navigationService;
             this.DialogService = dialogService;
-            AddItem = new Command(() => _addItem());
+            AddItem = new Command((object ItemToAdd) => _addItem(ItemToAdd));
             DeleteItem = new Command(() => _deleteItem());
 
-            MessagingCenter.Subscribe<MainPage, Item>(this, "getSelectedItem", (sender, item) =>
-            {
-                SelectedItem = item;
-            });
-
-            MessagingCenter.Subscribe<MainPage>(this, "deleteItem", (sender) =>
-            {
-                _deleteItem();
-            });
-
+                  
             MessagingCenter.Subscribe<MainPage, object>(this, "changeImage", (sender, obj) =>
             {
                 _ChangeImage(obj);
@@ -76,26 +67,10 @@ namespace ListaDeCompras
         }
 
 
-        private async void _addItem()
-        {            
+        private async void _addItem(object itemToAdd)
+        {        
             await navigationService.NavigateAsync("EditionPage");
-            MessagingCenter.Send(this, "ItensToListView", ItensToListView);
-        }
-
-
-        private async void _clearLIst()
-        {
-            if (!IsBusy) {
-                IsBusy = true;          
-                    var resp = await DialogService.DisplayAlertAsync(
-                        "Limpar Lista", "Tem certeza que deseja LIMPAR todos os itens armazenados ?", "Sim", "Cancelar");
-                    if (resp)
-                    {
-                    DbManager.DeleteAll();
-                    ItensToListView.Clear();
-                    }                                                                            
-                IsBusy = false;
-            }
+            MessagingCenter.Send(this, "ItensToListView", ItensToListView);                        
         }
 
 
@@ -108,17 +83,33 @@ namespace ListaDeCompras
         private async void _deleteItem()
         {
 
-            if (SelectedItem != null) {
+            if (SelectedItem != null) {               
+                SelectedItem = null;
                 var resp = await DialogService.DisplayAlertAsync("Apagar Item", "Tem certeza que deseja apagar o item " + 
                                                                   SelectedItem.Nome + " da lista ?", "Sim", "Cancelar");
                 if (resp)
                 {
                     ItensToListView.Remove(SelectedItem);
-                    DbManager.DeleteValue(SelectedItem);
-                    SelectedItem = null;
+                    DbManager.DeleteValue(SelectedItem);                    
                 }
             }
         }
     }
 }
 
+
+
+//private async void _clearLIst()
+//{
+//    if (!IsBusy) {
+//        IsBusy = true;          
+//            var resp = await DialogService.DisplayAlertAsync(
+//                "Limpar Lista", "Tem certeza que deseja LIMPAR todos os itens armazenados ?", "Sim", "Cancelar");
+//            if (resp)
+//            {
+//            DbManager.DeleteAll();
+//            ItensToListView.Clear();
+//            }                                                                            
+//        IsBusy = false;
+//    }
+//}

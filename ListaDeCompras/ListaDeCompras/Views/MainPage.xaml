@@ -5,17 +5,15 @@
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:local="clr-namespace:WorkingWithTriggers;assembly=WorkingWithTriggers"
              prism:ViewModelLocator.AutowireViewModel="True"
-             Title="Lista de Compras"               
+             Title="Lista de Compras"  
+             x:Name="MainPage"
              x:Class="ListaDeCompras.MainPage">
-            
-            <ContentPage.ToolbarItems>
+
+    <ContentPage.ToolbarItems>
         <ToolbarItem Command="{Binding AddItem}" 
                         Order="Default" Priority="2" 
                         Icon="addItem.png"/>
-
-        <ToolbarItem Command="{Binding DeleteItem}" 
-                        Order="Default" Priority="2" 
-                        Icon="delete.png"/>
+     
     </ContentPage.ToolbarItems> 
             <StackLayout HorizontalOptions="Fill"
                          Orientation="Vertical"
@@ -24,8 +22,9 @@
                                 SeparatorColor="DarkBlue"
                                 HorizontalOptions="Fill"                        
                                 VerticalOptions="FillAndExpand"
-                                HasUnevenRows="true"                            
-                                x:Name="lv"
+                                HasUnevenRows="true"     
+                                SelectedItem="{Binding SelectedItem}"
+                                x:Name="lv"                                
                                 ItemsSource="{Binding ItensToListView}">                               
                                 <ListView.ItemTemplate>
                                 <DataTemplate>
@@ -55,7 +54,7 @@
                                                                                         Text="{Binding Nome}" 
                                                                                         FontAttributes="Bold"
                                                                                         Margin="1,10,0,0" 
-                                                                                        TextColor="Brown"
+                                                                                        TextColor= "#b3011f"
                                                                                         HorizontalOptions="Fill"
                                                                                         HorizontalTextAlignment="Start" 
                                                                                         FontSize="Large"/>                                                                                                            
@@ -79,17 +78,26 @@
                                                                                             Margin="0,0,0,10"
                                                                                             TextColor="Black"/>                                                                                                                                                                                                        
                                                                         </StackLayout>
-                                                                 </StackLayout>                                                                 
+                                                                 </StackLayout>  
+                                                                 <StackLayout BackgroundColor="#193cd2"
+                                                                              HorizontalOptions="End"
+                                                                              IsVisible="true"
+                                                                              MinimumHeightRequest="200">
+                                                                              <Image Source = "delete.png"  
+                                                                                    Margin="0,5,10,0"    
+                                                                                    x:Name="n"
+                                                                                    VerticalOptions="Center">                                                                                                                         
+                                                                                    <Image.GestureRecognizers>
+                                                                                          <TapGestureRecognizer
+                                                                                          Command="{Binding DeleteItem}" 
+                                                                                          />
+                                                                                    </Image.GestureRecognizers>
+                                                                              </Image>                          
+                                                                </StackLayout>
                                                     </StackLayout>
                                             </ViewCell>
                                      </DataTemplate>
                                 </ListView.ItemTemplate>
-                          </ListView>
-                        <StackLayout 
-                            Orientation="Horizontal" 
-                            VerticalOptions="End" 
-                            HorizontalOptions="Fill" 
-                            HeightRequest="0.8" 
-                            BackgroundColor="Black"/>
-                </StackLayout> 
+                          </ListView>                                            
+            </StackLayout>                                                                                                                                                                                                                                                                                                                                                                      
 </ContentPage>

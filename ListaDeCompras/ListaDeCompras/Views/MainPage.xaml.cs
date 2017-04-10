@@ -14,19 +14,22 @@ namespace ListaDeCompras
         public MainPage()
         {
             InitializeComponent();
-            lv.ItemSelected += lv_ItemSelect;
-        }
-
-        private void lv_ItemSelect(object sender, SelectedItemChangedEventArgs e)
-        {
-            Item item = (Item)e.SelectedItem;
-            ListView l = (ListView) sender;
-            MessagingCenter.Send(this, "getSelectedItem", item);            
         }
 
 
         public void ImageClick(object obj) {
             MessagingCenter.Send(this, "changeImage", obj);                       
-        }      
+        }
+
+        public async void ImageClick2(object obj)
+        {
+            try
+            {                      
+                 await DisplayAlert("", obj.ToString(), "Ok");              
+            }
+            catch (Exception e) {
+                await DisplayAlert("", "Erro: " + e.Message, "Ok");
+            }
+        }
     }
 }
